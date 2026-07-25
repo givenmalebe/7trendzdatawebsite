@@ -1,0 +1,113 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isAdmin() {
+      return signedIn() && userDoc().data.role == 'admin';
+    }
+
+    function isClient() {
+      return signedIn() && userDoc().data.role == 'client';
+    }
+
+    function userClientId() {
+      return userDoc().data.clientId;
+    }
+
+    function isAdminEmail() {
+      return request.auth.token.email in [
+        'info@7trendzdata.com',
+        'admin@7trendzdata.com'
+      ];
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role in ['admin', 'client']
+        && (
+          request.resource.data.role == 'client'
+          || isAdminEmail()
+          || request.resource.data.role == 'admin'
+        );
+      allow update: if signedIn() && (
+        isAdmin() ||
+        (request.auth.uid == userId && request.resource.data.role == resource.data.role)
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /clients/{clientId} {
+      allow read: if isAdmin()
+        || (isClient() && userClientId() == clientId)
+        || (signedIn() && isClient() && userDoc().data.get('clientId', null) == null
+            && resource.data.email == userDoc().data.email);
+      allow create: if isAdmin() || (
+        signedIn()
+        && isClient()
+        && userDoc().data.get('clientId', null) == null
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status in ['active', 'inactive', 'lead']
+      );
+      allow update: if isAdmin() || (
+        signedIn()
+        && isClient()
+        && userDoc().data.get('clientId', null) == null
+        && resource.data.email == userDoc().data.email
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['userId'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /revenue/{entryId} {
+      allow read: if isAdmin() || (isClient() && resource.data.clientId == userClientId());
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /reports/{reportId} {
+      allow read: if isAdmin() || (isClient() && resource.data.clientId == userClientId());
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /blog_posts/{postId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (
+        resource.data.status == 'published'
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views'])
+      );
+    }
+
+    match /contact_messages/{messageId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.message is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.message.size() > 0;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /setup/admin {
+      allow read: if true;
+      allow create: if !exists(/databases/$(database)/documents/setup/admin)
+        && request.resource.data.keys().hasAll(['created', 'email'])
+        && request.resource.data.created == true;
+      allow update, delete: if false;
+    }
+  }
+}
