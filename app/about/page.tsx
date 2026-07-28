@@ -5,6 +5,22 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CyberBackground } from "@/components/cyber-background"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about 7Trendz Data — South Africa's leading AI automation and cybersecurity red teaming company. Founded 2024, we find security vulnerabilities and connect clients with the right defenders.",
+  openGraph: {
+    title: "About 7Trendz Data — AI Automation & Red Teaming",
+    description:
+      "South Africa's leading AI automation and cybersecurity red teaming company. We find security vulnerabilities and connect clients with the right defenders.",
+    url: "https://7trendzdata.com/about",
+  },
+  alternates: {
+    canonical: "https://7trendzdata.com/about",
+  },
+}
 
 export default function AboutPage() {
   const values = [

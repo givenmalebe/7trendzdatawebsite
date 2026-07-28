@@ -1,0 +1,12 @@
+{
+  "name": "file-reader-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for reading PDF and Excel files",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
+  }
+}

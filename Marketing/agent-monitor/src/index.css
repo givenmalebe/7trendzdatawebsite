@@ -1,0 +1,83 @@
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #222240;
+  --border: #2a2a4a;
+  --border-glow: #3b3b6b;
+  --text-primary: #e8e8f0;
+  --text-secondary: #8888aa;
+  --text-muted: #555577;
+  --accent-blue: #4f8fff;
+  --accent-purple: #8b5cf6;
+  --accent-green: #22c55e;
+  --accent-orange: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-cyan: #06b6d4;
+  --accent-pink: #ec4899;
+  --glow-blue: rgba(79, 143, 255, 0.15);
+  --glow-green: rgba(34, 197, 94, 0.15);
+  --glow-orange: rgba(245, 158, 11, 0.15);
+  --glow-red: rgba(239, 68, 68, 0.15);
+  --glow-purple: rgba(139, 92, 246, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 3s linear infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-slide-in { animation: slide-in-right 0.3s ease-out; }
+.animate-slide-up { animation: slide-in-up 0.3s ease-out; }

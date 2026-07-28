@@ -1,0 +1,36 @@
+# Environment
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Tools
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / Next.js
+node_modules/
+.next/
+next-env.d.ts
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db

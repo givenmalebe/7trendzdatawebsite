@@ -1,6 +1,7 @@
 /**
  * One-time script to create the default admin account.
  * Usage: node scripts/create-admin.mjs [email] [password]
+ * Password is REQUIRED — no default is provided for security.
  */
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
@@ -16,17 +17,18 @@ const firebaseConfig = {
 }
 
 const ADMIN_EMAILS = ["info@7trendzdata.com", "admin@7trendzdata.com"]
-const email = (process.argv[2] || "admin@7trendzdata.com").toLowerCase()
-const password = process.argv[3] || "7Trendz@Admin2026"
+const email = (process.argv[2] || "").toLowerCase()
+const password = process.argv[3] || ""
 const displayName = "7Trendz Admin"
 
-if (!ADMIN_EMAILS.includes(email)) {
+if (!email || !ADMIN_EMAILS.includes(email)) {
+  console.error(`Usage: node scripts/create-admin.mjs <email> <password>`)
   console.error(`Email must be one of: ${ADMIN_EMAILS.join(", ")}`)
   process.exit(1)
 }
 
-if (password.length < 6) {
-  console.error("Password must be at least 6 characters.")
+if (!password || password.length < 8) {
+  console.error("Password is required and must be at least 8 characters.")
   process.exit(1)
 }
 

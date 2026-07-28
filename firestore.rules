@@ -83,6 +83,10 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    match /admin_settings/{configId} {
+      allow read, write: if isAdmin();
+    }
+
     match /blog_posts/{postId} {
       allow read: if resource.data.status == 'published' || isAdmin();
       allow create, delete: if isAdmin();

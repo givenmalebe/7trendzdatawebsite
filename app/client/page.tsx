@@ -6,7 +6,7 @@ import { ClientShell } from "@/components/client-shell"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Download, FileText, Crosshair, CheckCircle2, Clock, Bot, Package } from "lucide-react"
+import { Download, FileText, Crosshair, CheckCircle2, Clock, Bot, Package, Eye } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
 import { fetchReportsByClient, type RedTeamReport } from "@/lib/report-service"
 import { fetchRevenueByClient, type RevenueEntry } from "@/lib/revenue-service"
@@ -59,11 +59,13 @@ function ClientContent() {
           fetchRevenueByClient(profile.clientId),
           fetchClient(profile.clientId),
         ])
-        setReports(r)
-        setOrders(o.filter((x) => x.status !== "cancelled"))
-        setClientInfo(c)
-      } catch {
-        setLinkError("Could not load your portal data.")
+        if (r) setReports(r)
+        if (o) setOrders(o.filter((x) => x.status !== "cancelled"))
+        if (c) setClientInfo(c)
+      } catch (e: any) {
+        if (e?.name !== "AbortError" && e?.code !== "failed-precondition") {
+          setLinkError("Could not load your portal data.")
+        }
       } finally {
         setLoading(false)
       }
@@ -109,7 +111,6 @@ function ClientContent() {
 
   if (selectedReport) {
     const canDownload = Boolean(selectedReport.reportFileUrl)
-    const deliveryComplete = selectedReport.stages.find((s) => s.id === "delivery")?.status === "completed"
 
     return (
       <ClientShell>
@@ -151,15 +152,31 @@ function ClientContent() {
               </div>
               <div className="border-t pt-6">
                 <h3 className="font-semibold mb-3">Final Report</h3>
-                {canDownload && deliveryComplete ? (
-                  <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                    <a href={selectedReport.reportFileUrl!} target="_blank" rel="noopener noreferrer" download>
-                      <Download className="h-5 w-5 mr-2" /> Download {selectedReport.reportFileName || "Report"}
-                    </a>
-                  </Button>
+                {canDownload ? (
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700">
+                        <a href={selectedReport.reportFileUrl!} target="_blank" rel="noopener noreferrer" download>
+                          <Download className="h-5 w-5 mr-2" /> Download {selectedReport.reportFileName || "Report"}
+                        </a>
+                      </Button>
+                      <Button asChild size="lg" variant="outline">
+                        <a href={selectedReport.reportFileUrl!} target="_blank" rel="noopener noreferrer">
+                          <Eye className="h-5 w-5 mr-2" /> View in Browser
+                        </a>
+                      </Button>
+                    </div>
+                    <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+                      <iframe
+                        src={selectedReport.reportFileUrl!}
+                        className="w-full h-[600px]"
+                        title={selectedReport.reportFileName || "Report PDF"}
+                      />
+                    </div>
+                  </div>
                 ) : (
                   <p className="text-muted-foreground text-sm">
-                    Available after delivery stage completes. Current: <strong>{currentStageLabel(selectedReport)}</strong>
+                    Report not yet available. Current stage: <strong>{currentStageLabel(selectedReport)}</strong>
                   </p>
                 )}
               </div>
@@ -285,7 +302,6 @@ function ClientContent() {
             ) : (
               <div className="grid gap-4">
                 {reports.map((r) => {
-                  const deliveryDone = r.stages.find((s) => s.id === "delivery")?.status === "completed"
                   const hasFile = Boolean(r.reportFileUrl)
                   return (
                     <Card key={r.id} className="hover:shadow-md transition-shadow">
@@ -306,10 +322,10 @@ function ClientContent() {
                             <Button asChild variant="outline">
                               <a href={`/client?view=reports&report=${r.id}`}>View details</a>
                             </Button>
-                            {hasFile && deliveryDone && (
+                            {hasFile && (
                               <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700">
                                 <a href={r.reportFileUrl!} target="_blank" rel="noopener noreferrer" download>
-                                  <Download className="h-4 w-4 mr-2" /> Download
+                                  <Download className="h-4 w-4 mr-2" /> Download PDF
                                 </a>
                               </Button>
                             )}

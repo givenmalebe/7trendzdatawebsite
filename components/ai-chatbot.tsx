@@ -21,6 +21,7 @@ import {
   Zap,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { sanitizeHTML } from "@/lib/sanitize"
 
 interface Message {
   id: string
@@ -380,7 +381,7 @@ export function AIChatbot() {
                       <div className="flex-1">
                         <div
                           className="text-sm whitespace-pre-wrap"
-                          dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
+                          dangerouslySetInnerHTML={{ __html: sanitizeHTML(formatMessage(message.content)) }}
                         />
                         <p className={`text-xs mt-2 ${message.role === "user" ? "text-blue-100" : "text-gray-500"}`}>
                           {formatTime(message.timestamp)}

@@ -25,12 +25,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const refreshProfile = useCallback(async () => {
     if (!user?.email) return
-    const current = await getUserProfile(user.uid)
-    if (current?.role === "client" && !current.clientId) {
-      await linkClientAccount(user.uid, user.email, current.displayName || user.displayName || "")
+    try {
+      const current = await getUserProfile(user.uid)
+      if (current?.role === "client" && !current.clientId) {
+        await linkClientAccount(user.uid, user.email, current.displayName || user.displayName || "")
+      }
+      const updated = await getUserProfile(user.uid)
+      setProfile(updated)
+    } catch (e: any) {
+      if (e?.name !== "AbortError" && e?.code !== "failed-precondition") {
+        console.error("Profile refresh error:", e)
+      }
     }
-    const updated = await getUserProfile(user.uid)
-    setProfile(updated)
   }, [user])
 
   useEffect(() => {

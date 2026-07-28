@@ -3,11 +3,84 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { Providers } from "./providers"
 
+const SITE_URL = "https://7trendzdata.com"
+const SITE_NAME = "7Trendz Data"
+
 export const metadata: Metadata = {
-  title: "7Trendz Data — AI Automation & Red Teaming",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    template: "%s | 7Trendz Data",
+  },
   description:
-    "AI automation plus red teaming and vulnerability analysis. We find your security gaps and connect you with the right defender for each issue — pentesting, AI recon agents, and expert referrals.",
-  icons: { icon: "/images/7trendz-logo-final.png" },
+    "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders for pentesting, AI recon agents, and expert referrals.",
+  keywords: [
+    "red teaming South Africa",
+    "cybersecurity South Africa",
+    "AI automation",
+    "penetration testing",
+    "vulnerability assessment",
+    "agentic AI",
+    "defender matching",
+    "security consulting Johannesburg",
+    "ethical hacking South Africa",
+    "AI agents for business",
+    "red team assessment",
+    "cyber security services",
+  ],
+  authors: [{ name: "7Trendz Data", url: SITE_URL }],
+  creator: "7Trendz Data",
+  publisher: "7Trendz Data",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    description:
+      "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders.",
+    images: [
+      {
+        url: "/images/7trendz-logo-final.png",
+        width: 1200,
+        height: 630,
+        alt: "7Trendz Data — AI Automation & Red Teaming",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    description:
+      "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders.",
+    images: ["/images/7trendz-logo-final.png"],
+    creator: "@7trendzdata",
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/images/7trendz-logo-final.png",
+    shortcut: "/images/7trendz-logo-final.png",
+    apple: "/apple-icon.png",
+  },
+  verification: {},
 }
 
 export default function RootLayout({
@@ -15,8 +88,67 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/7trendz-logo-final.png`,
+    description:
+      "South Africa's leading cybersecurity red teaming and AI automation company.",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Johannesburg",
+      addressRegion: "Gauteng",
+      addressCountry: "ZA",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "South Africa",
+    },
+    sameAs: [],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      availableLanguage: ["English"],
+    },
+    makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Red Team Assessment",
+          description: "Comprehensive red team engagement to identify real-world security vulnerabilities.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Automation",
+          description: "Custom AI agents and automation solutions for business processes.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Penetration Testing",
+          description: "Professional penetration testing and vulnerability assessment services.",
+        },
+      },
+    ],
+  }
+
   return (
     <html lang="en">
+      <head>
+        <meta name="msvalidate.01" content="2B5357F930D8CABC758A10E9E75DD6D2" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "zoho": {
+      "url": "https://marjeting-930519142.zohomcp.com/mcp/1fa0ff8b9879389f04a95957aac4198d/message"
+    },
+    "file-reader": {
+      "command": "node",
+      "args": ["tools/mcp-servers/file-reader-mcp/index.js"]
+    }
+  }
+}

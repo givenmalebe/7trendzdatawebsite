@@ -11,6 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { registerAdminUser } from "@/lib/auth-service"
+import { authFetch } from "@/lib/auth-fetch"
 
 function authErrorMessage(err: unknown): string {
   const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : ""
@@ -50,13 +51,23 @@ export default function CreateAdminPage() {
       setError("Passwords do not match.")
       return
     }
-    if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters.")
+    if (formData.password.length < 8) {
+      setError("Password must be at least 8 characters with uppercase, lowercase, and numbers.")
       return
     }
 
     setIsSubmitting(true)
     try {
+      const checkRes = await authFetch("/api/create-admin", {
+        method: "POST",
+        body: JSON.stringify({ email: formData.email.trim().toLowerCase() }),
+      })
+      const checkData = await checkRes.json()
+      if (!checkRes.ok) {
+        setError(checkData.error || "Email not authorized.")
+        return
+      }
+
       await registerAdminUser(formData.email, formData.password, formData.name || "Admin")
       setCreatedEmail(formData.email.trim().toLowerCase())
       setSuccess(true)

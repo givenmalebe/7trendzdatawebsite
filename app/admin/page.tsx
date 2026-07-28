@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
+import Image from "next/image"
 import { AdminShell } from "@/components/admin-shell"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,7 @@ import { fetchLeads, updateLeadStatus, deleteLead, type Lead } from "@/lib/lead-
 import { uploadReportFile } from "@/lib/storage-service"
 import { SERVICES_PRODUCTS, REPORT_STAGES, DELIVERY_STATUS_LABELS, type ReportStageId, type StageStatus } from "@/lib/catalog"
 import { PostEditorForm } from "@/components/post-editor-form"
+import { AIBlogGenerator } from "@/components/ai-blog-generator"
 import { ReportStageTracker } from "@/components/report-stage-tracker"
 import { OrderDeliveryEditor } from "@/components/admin/order-delivery-editor"
 
@@ -132,25 +134,33 @@ function AdminContent() {
   const [loading, setLoading] = useState(true)
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null)
   const [isEditing, setIsEditing] = useState(false)
-  const [blogTab, setBlogTab] = useState("all")
+  const [blogTab, setBlogTab] = useState("ai-agent")
 
   const [newClient, setNewClient] = useState({ name: "", company: "", email: "", phone: "", status: "active" as Client["status"] })
   const [newRevenue, setNewRevenue] = useState({ clientId: "", serviceId: "", amount: "", status: "pending" as RevenueEntry["status"], notes: "" })
   const [newReport, setNewReport] = useState({ clientId: "", title: "", description: "" })
   const [selectedReport, setSelectedReport] = useState<RedTeamReport | null>(null)
   const [uploadingReport, setUploadingReport] = useState(false)
+  const [uploadError, setUploadError] = useState("")
 
   const loadAll = async () => {
     setLoading(true)
     try {
-      const [p, c, r, rep, l] = await Promise.all([fetchBlogPosts(), fetchClients(), fetchRevenue(), fetchReports(), fetchLeads()])
-      setPosts(p)
-      setClients(c)
-      setRevenue(r)
-      setReports(rep)
-      setLeads(l)
+      const safe = <T,>(p: Promise<T>): Promise<T | null> => p.catch(() => null)
+      const [p, c, r, rep, l] = await Promise.all([
+        safe(fetchBlogPosts()),
+        safe(fetchClients()),
+        safe(fetchRevenue()),
+        safe(fetchReports()),
+        safe(fetchLeads()),
+      ])
+      if (p) setPosts(p)
+      if (c) setClients(c)
+      if (r) setRevenue(r)
+      if (rep) setReports(rep)
+      if (l) setLeads(l)
     } catch (e) {
-      console.error(e)
+      console.error("Load error:", e)
     } finally {
       setLoading(false)
     }
@@ -170,7 +180,7 @@ function AdminContent() {
   }
 
   const handleSavePost = async (post: Omit<BlogPost, "id" | "created_at" | "views">) => {
-    if (editingPost) await updateBlogPost(editingPost.id, post)
+    if (editingPost?.id) await updateBlogPost(editingPost.id, post)
     else await createBlogPost(post)
     setIsEditing(false)
     setEditingPost(null)
@@ -223,11 +233,17 @@ function AdminContent() {
 
   const handleUploadReport = async (reportId: string, file: File) => {
     setUploadingReport(true)
+    setUploadError("")
     try {
       const { url, fileName } = await uploadReportFile(reportId, file)
       await attachReportFile(reportId, url, fileName)
       await updateReportStage(reportId, "delivery", "completed")
       await loadAll()
+      const updated = (await fetchReports()).find((r) => r.id === reportId)
+      if (updated) setSelectedReport(updated)
+    } catch (err: any) {
+      console.error("Upload failed:", err)
+      setUploadError(err.message || "Upload failed. Check your connection and try again.")
     } finally {
       setUploadingReport(false)
     }
@@ -308,34 +324,94 @@ function AdminContent() {
         <div className="space-y-6">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl font-bold">Blog Management</h1>
-            <Button onClick={() => setIsEditing(true)}><Plus className="h-4 w-4 mr-2" /> New Post</Button>
+            <Button onClick={() => setIsEditing(true)} variant="outline"><Plus className="h-4 w-4 mr-2" /> Write Manually</Button>
           </div>
           <Tabs value={blogTab} onValueChange={setBlogTab}>
             <TabsList>
+              <TabsTrigger value="ai-agent">🤖 AI Agent</TabsTrigger>
               <TabsTrigger value="all">All ({posts.length})</TabsTrigger>
               <TabsTrigger value="published">Published</TabsTrigger>
               <TabsTrigger value="draft">Drafts</TabsTrigger>
             </TabsList>
-            <TabsContent value={blogTab} className="space-y-4 mt-4">
-              {posts.filter((p) => blogTab === "all" || p.status === blogTab).map((post) => (
-                <Card key={post.id}>
-                  <CardHeader>
-                    <div className="flex justify-between">
-                      <div>
-                        <CardTitle className="text-lg">{post.title}</CardTitle>
-                        <CardDescription>{post.excerpt}</CardDescription>
-                      </div>
-                      <Badge>{post.status}</Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => { setEditingPost(post); setIsEditing(true) }}><Edit className="h-4 w-4" /></Button>
-                    <Button size="sm" variant="outline" onClick={async () => { await deleteBlogPost(post.id); loadAll() }} className="text-red-600"><Trash2 className="h-4 w-4" /></Button>
-                    <Button size="sm" variant="outline" asChild><a href={`/blog-reader?id=${post.id}`} target="_blank"><Eye className="h-4 w-4" /></a></Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </TabsContent>
+            {blogTab === "ai-agent" && (
+              <div className="mt-4">
+                <AIBlogGenerator
+                  onUseGeneratedBlog={(data) => {
+                    setEditingPost({
+                      id: "",
+                      title: data.title,
+                      excerpt: data.excerpt,
+                      content: data.content,
+                      category: data.category,
+                      tags: data.tags,
+                      status: data.status,
+                      author: "7Trendz AI Agent",
+                      published_at: "",
+                      created_at: "",
+                      views: 0,
+                      image_url: data.image_url,
+                    })
+                    setIsEditing(true)
+                    setBlogTab("all")
+                  }}
+                />
+              </div>
+            )}
+            {blogTab !== "ai-agent" && (
+              <TabsContent value={blogTab} className="space-y-3 mt-4">
+                {posts.filter((p) => blogTab === "all" || p.status === blogTab).map((post) => {
+                  const catMeta = ({ Cybersecurity: { icon: "🛡️", color: "bg-red-50 text-red-700 border-red-200" }, "AI Automation": { icon: "🤖", color: "bg-blue-50 text-blue-700 border-blue-200" }, "Agentic AI": { icon: "🧠", color: "bg-purple-50 text-purple-700 border-purple-200" }, "Red Teaming": { icon: "🎯", color: "bg-orange-50 text-orange-700 border-orange-200" }, "Vulnerability Analysis": { icon: "🔍", color: "bg-amber-50 text-amber-700 border-amber-200" }, "Defender Matching": { icon: "🤝", color: "bg-cyan-50 text-cyan-700 border-cyan-200" } } as any)[post.category] || { icon: "📄", color: "bg-slate-50 text-slate-700 border-slate-200" }
+                  return (
+                    <Card key={post.id} className="group hover:shadow-md transition-all duration-300 border-slate-200/60">
+                      <CardContent className="p-4">
+                        <div className="flex items-start gap-4">
+                          {post.image_url && (
+                            <div className="hidden sm:block relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-slate-100">
+                              <Image src={post.image_url} alt="" fill className="object-cover" unoptimized />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${catMeta.color}`}>
+                                {catMeta.icon} {post.category}
+                              </span>
+                              <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full ${post.status === "published" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+                                <div className={`w-1.5 h-1.5 rounded-full ${post.status === "published" ? "bg-emerald-500" : "bg-amber-400"}`} />
+                                {post.status}
+                              </span>
+                            </div>
+                            <h3 className="font-semibold text-slate-800 truncate group-hover:text-cyan-700 transition-colors">{post.title}</h3>
+                            <p className="text-sm text-slate-400 truncate mt-0.5">{post.excerpt}</p>
+                            <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
+                              <span>{post.author}</span>
+                              <span>{post.views || 0} views</span>
+                              {post.tags?.length > 0 && <span>{post.tags.length} tags</span>}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-cyan-600" onClick={() => { setEditingPost(post); setIsEditing(true) }}>
+                              <Edit className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-red-600" onClick={async () => { await deleteBlogPost(post.id); loadAll() }}>
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-slate-700" asChild>
+                              <a href={`/blog-reader?id=${post.id}`} target="_blank"><Eye className="h-3.5 w-3.5" /></a>
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+                {posts.filter((p) => blogTab === "all" || p.status === blogTab).length === 0 && (
+                  <div className="text-center py-12 text-slate-400">
+                    <FileText className="h-10 w-10 mx-auto mb-3 opacity-30" />
+                    <p className="text-sm">No posts yet. Create your first one!</p>
+                  </div>
+                )}
+              </TabsContent>
+            )}
           </Tabs>
         </div>
       )}
@@ -503,18 +579,41 @@ function AdminContent() {
                       )
                     })}
                   </div>
-                  <div className="border-t pt-4">
+                  <div className="border-t pt-4 space-y-3">
                     <Label>Upload Final Report (PDF)</Label>
-                    <Input type="file" accept=".pdf,.doc,.docx" className="mt-2" onChange={(e) => {
-                      const file = e.target.files?.[0]
-                      if (file) handleUploadReport(selectedReport.id, file)
-                    }} disabled={uploadingReport} />
+                    <div className="flex items-center gap-3">
+                      <Input
+                        type="file"
+                        accept=".pdf"
+                        className="mt-1"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) handleUploadReport(selectedReport.id, file)
+                          e.target.value = ""
+                        }}
+                        disabled={uploadingReport}
+                      />
+                    </div>
+                    {uploadingReport && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-cyan-600" />
+                        Uploading PDF to client portal...
+                      </div>
+                    )}
+                    {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
                     {selectedReport.reportFileUrl && (
-                      <Button asChild className="mt-3" variant="outline">
-                        <a href={selectedReport.reportFileUrl} target="_blank" rel="noopener noreferrer">
-                          <Download className="h-4 w-4 mr-2" /> {selectedReport.reportFileName || "Download Report"}
-                        </a>
-                      </Button>
+                      <div className="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                        <FileText className="h-5 w-5 text-emerald-600 shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-emerald-800 truncate">{selectedReport.reportFileName || "Report file"}</p>
+                          <p className="text-xs text-emerald-600">Uploaded and visible to client</p>
+                        </div>
+                        <Button asChild size="sm" variant="outline" className="border-emerald-300 hover:bg-emerald-100">
+                          <a href={selectedReport.reportFileUrl} target="_blank" rel="noopener noreferrer">
+                            <Download className="h-4 w-4 mr-1" /> View
+                          </a>
+                        </Button>
+                      </div>
                     )}
                   </div>
                   <Button variant="destructive" onClick={() => { deleteReport(selectedReport.id).then(() => { setSelectedReport(null); loadAll() }) }}>Delete Report</Button>

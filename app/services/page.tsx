@@ -25,6 +25,22 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CyberBackground } from "@/components/cyber-background"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Cybersecurity red teaming, AI automation, penetration testing, vulnerability analysis, and defender matching services. Expert security consulting for South African businesses.",
+  openGraph: {
+    title: "Our Services — 7Trendz Data",
+    description:
+      "Cybersecurity red teaming, AI automation, penetration testing, vulnerability analysis, and defender matching services.",
+    url: "https://7trendzdata.com/services",
+  },
+  alternates: {
+    canonical: "https://7trendzdata.com/services",
+  },
+}
 
 export default function ServicesPage() {
   const services = [
