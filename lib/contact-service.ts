@@ -1,6 +1,7 @@
 import { collection, addDoc, getDocs, query, orderBy, updateDoc, doc, serverTimestamp } from "firebase/firestore"
 import { db } from "./firebase"
 import { docWithId } from "./firestore-utils"
+import { createLead } from "./lead-service"
 
 export interface ContactMessage {
   id: string
@@ -19,6 +20,16 @@ export async function submitContactMessage(data: Omit<ContactMessage, "id" | "re
     ...data,
     read: false,
     created_at: serverTimestamp(),
+  })
+  await createLead({
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    company: data.company,
+    interest: data.subject || "General Enquiry",
+    message: data.message,
+    source: "contact_page",
+    status: "new",
   })
 }
 
