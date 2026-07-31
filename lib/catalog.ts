@@ -1,18 +1,50 @@
 export const ADMIN_EMAILS = ["info@7trendzdata.com", "admin@7trendzdata.com"]
 
-export const SERVICES_PRODUCTS = [
-  { id: "ai-receptionist", name: "AI Receptionist", category: "AI Automation", defaultPrice: 699 },
-  { id: "ai-chatbots", name: "AI Chatbots", category: "AI Automation", defaultPrice: 499 },
-  { id: "custom-ai-models", name: "Custom AI Models", category: "AI Automation", defaultPrice: 2500 },
-  { id: "process-automation", name: "Process Automation", category: "AI Automation", defaultPrice: 1500 },
-  { id: "ai-seo", name: "AI SEO", category: "AI Automation", defaultPrice: 399 },
-  { id: "pentest", name: "Penetration Testing", category: "Red Team", defaultPrice: 3500 },
-  { id: "red-team", name: "Red Team Assessment", category: "Red Team", defaultPrice: 5000 },
-  { id: "ai-recon", name: "AI Recon Agents", category: "Red Team", defaultPrice: 1200 },
-  { id: "vuln-analysis", name: "AI Vulnerability Analysis", category: "Red Team", defaultPrice: 1800 },
-  { id: "defender-matching", name: "Defender Matching", category: "Red Team", defaultPrice: 800 },
-  { id: "bundle", name: "AI + Red Team Bundle", category: "Bundle", defaultPrice: 4500 },
+export const PENTEST_REPORT_TIERS = [
+  {
+    id: "pentest-report-low",
+    severity: "Low",
+    label: "Low Vulnerability",
+    description: "Pentesting report covering low-severity findings",
+    defaultPrice: 2500,
+    badge: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    dot: "bg-emerald-500",
+  },
+  {
+    id: "pentest-report-medium",
+    severity: "Medium",
+    label: "Medium Vulnerability",
+    description: "Pentesting report covering medium-severity findings",
+    defaultPrice: 5000,
+    badge: "bg-amber-50 text-amber-700 border-amber-200",
+    dot: "bg-amber-500",
+  },
+  {
+    id: "pentest-report-high",
+    severity: "High",
+    label: "High Vulnerability",
+    description: "Pentesting report covering high-severity findings",
+    defaultPrice: 10000,
+    badge: "bg-orange-50 text-orange-700 border-orange-200",
+    dot: "bg-orange-500",
+  },
+  {
+    id: "pentest-report-critical",
+    severity: "Critical",
+    label: "Critical Vulnerability",
+    description: "Pentesting report covering critical-severity findings",
+    defaultPrice: 15000,
+    badge: "bg-red-50 text-red-700 border-red-200",
+    dot: "bg-red-500",
+  },
 ] as const
+
+export const SERVICES_PRODUCTS = PENTEST_REPORT_TIERS.map((tier) => ({
+  id: tier.id,
+  name: `Pentesting Report — ${tier.label}`,
+  category: "Red Team",
+  defaultPrice: tier.defaultPrice,
+}))
 
 export const REPORT_STAGES = [
   { id: "intake", label: "Intake & Scoping", description: "Project kickoff and scope definition" },
@@ -46,32 +78,17 @@ export const DELIVERY_STATUS_LABELS: Record<DeliveryStatus, string> = {
 }
 
 export const SERVICE_ICONS: Record<string, string> = {
-  "ai-receptionist": "🤖",
-  "ai-chatbots": "💬",
-  "custom-ai-models": "🧠",
-  "process-automation": "⚙️",
-  "ai-seo": "📈",
-  pentest: "🎯",
-  "red-team": "🔴",
-  "ai-recon": "🔍",
-  "vuln-analysis": "🛡️",
-  "defender-matching": "🤝",
-  bundle: "📦",
+  "pentest-report-low": "🟢",
+  "pentest-report-medium": "🟡",
+  "pentest-report-high": "🟠",
+  "pentest-report-critical": "🔴",
 }
 
 export function defaultMilestonesForCategory(category: string) {
-  if (category === "Red Team") {
-    return [
-      { id: "scope", label: "Scoping & Authorization", status: "pending" as StageStatus, completedAt: null, notes: "" },
-      { id: "testing", label: "Testing & Analysis", status: "pending" as StageStatus, completedAt: null, notes: "" },
-      { id: "report", label: "Report & Recommendations", status: "pending" as StageStatus, completedAt: null, notes: "" },
-    ]
-  }
   return [
-    { id: "discovery", label: "Discovery & Requirements", status: "pending" as StageStatus, completedAt: null, notes: "" },
-    { id: "build", label: "Build & Configuration", status: "pending" as StageStatus, completedAt: null, notes: "" },
-    { id: "integration", label: "Integration & Testing", status: "pending" as StageStatus, completedAt: null, notes: "" },
-    { id: "golive", label: "Go Live & Handover", status: "pending" as StageStatus, completedAt: null, notes: "" },
+    { id: "scope", label: "Scoping & Authorization", status: "pending" as StageStatus, completedAt: null, notes: "" },
+    { id: "testing", label: "Testing & Analysis", status: "pending" as StageStatus, completedAt: null, notes: "" },
+    { id: "report", label: "Report & Recommendations", status: "pending" as StageStatus, completedAt: null, notes: "" },
   ]
 }
 

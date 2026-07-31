@@ -37,8 +37,6 @@ interface PostEditorFormProps {
 
 const CATEGORY_META: Record<string, { icon: string; gradient: string; color: string }> = {
   Cybersecurity: { icon: "🛡️", gradient: "from-red-500 to-rose-600", color: "bg-red-50 text-red-700 border-red-200" },
-  "AI Automation": { icon: "🤖", gradient: "from-blue-500 to-indigo-600", color: "bg-blue-50 text-blue-700 border-blue-200" },
-  "Agentic AI": { icon: "🧠", gradient: "from-purple-500 to-violet-600", color: "bg-purple-50 text-purple-700 border-purple-200" },
   "Red Teaming": { icon: "🎯", gradient: "from-orange-500 to-red-600", color: "bg-orange-50 text-orange-700 border-orange-200" },
   "Vulnerability Analysis": { icon: "🔍", gradient: "from-amber-500 to-yellow-600", color: "bg-amber-50 text-amber-700 border-amber-200" },
   "Defender Matching": { icon: "🤝", gradient: "from-cyan-500 to-teal-600", color: "bg-cyan-50 text-cyan-700 border-cyan-200" },

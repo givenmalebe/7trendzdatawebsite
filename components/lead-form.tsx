@@ -24,9 +24,11 @@ interface LeadFormProps {
 
 const INTERESTS = [
   "Red Team Assessment",
-  "AI Automation",
+  "Pentesting Report — Low (R2,500)",
+  "Pentesting Report — Medium (R5,000)",
+  "Pentesting Report — High (R10,000)",
+  "Pentesting Report — Critical (R15,000)",
   "Vulnerability Analysis",
-  "Penetration Testing",
   "Defender Matching",
   "Other",
 ]

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Phone, MapPin, Shield, Bot, Crosshair } from "lucide-react"
+import { Mail, Phone, MapPin, Shield, Crosshair } from "lucide-react"
 
 export function Footer() {
   return (
@@ -14,8 +14,9 @@ export function Footer() {
               <span className="text-xl font-bold">7Trendz Data</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              We help clients automate with intelligent AI and expose security gaps through red teaming and
-              vulnerability analysis — then connect you with the right defender for each issue we find.
+              We expose security gaps through red teaming, pentesting, and vulnerability analysis — then connect you
+              with the right defender for each issue we find. Every engagement is delivered as a severity-priced
+              Pentesting Report.
             </p>
           </div>
 
@@ -39,17 +40,10 @@ export function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider mb-4 flex items-center gap-2">
-              <Bot className="h-4 w-4 text-cyan-400" /> AI Solutions
-            </h3>
-            <ul className="space-y-2 text-sm text-slate-400 mb-6">
-              <li>AI Receptionist & Chatbots</li>
-              <li>Custom AI Models</li>
-              <li>Process Automation</li>
-            </ul>
-            <h3 className="text-sm font-semibold uppercase tracking-wider mb-4 flex items-center gap-2">
-              <Crosshair className="h-4 w-4 text-red-400" /> Security
+              <Crosshair className="h-4 w-4 text-red-400" /> Cybersecurity
             </h3>
             <ul className="space-y-2 text-sm text-slate-400">
+              <li>Penetration Testing</li>
               <li>Red Teaming</li>
               <li>Vulnerability Analysis</li>
               <li>Defender Matching</li>
@@ -77,7 +71,7 @@ export function Footer() {
         <div className="border-t border-slate-800 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-slate-500">© {new Date().getFullYear()} 7Trendz Data. All rights reserved.</p>
           <p className="flex items-center gap-2 text-xs text-slate-500">
-            <Shield className="h-3 w-3 text-cyan-400" /> AI Automation · Red Teaming · Vulnerability Analysis
+            <Shield className="h-3 w-3 text-cyan-400" /> Cybersecurity · Red Teaming · Vulnerability Analysis
           </p>
         </div>
       </div>

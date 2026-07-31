@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Bot, Users, Award, ArrowRight, Target, Eye, ShieldAlert, Shield } from "lucide-react"
+import { ShieldCheck, Users, Award, ArrowRight, Target, Eye, ShieldAlert } from "lucide-react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -10,11 +10,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about 7Trendz Data — South Africa's leading AI automation and cybersecurity red teaming company. Founded 2024, we find security vulnerabilities and connect clients with the right defenders.",
+    "Learn about 7Trendz Data — South Africa's leading cybersecurity red teaming company. Founded 2024, we find security vulnerabilities and connect clients with the right defenders.",
   openGraph: {
-    title: "About 7Trendz Data — AI Automation & Red Teaming",
+    title: "About 7Trendz Data — Cybersecurity & Red Teaming",
     description:
-      "South Africa's leading AI automation and cybersecurity red teaming company. We find security vulnerabilities and connect clients with the right defenders.",
+      "South Africa's leading cybersecurity red teaming company. We find security vulnerabilities and connect clients with the right defenders.",
     url: "https://7trendzdata.com/about",
   },
   alternates: {
@@ -24,17 +24,17 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const values = [
-    { icon: Bot, title: "AI-First Approach", description: "We leverage cutting-edge AI technology to solve real business problems and drive automation." },
-    { icon: Users, title: "Client Success", description: "Your business growth is our priority. We build solutions that deliver measurable results." },
+    { icon: ShieldCheck, title: "Cybersecurity Only", description: "We focus exclusively on red teaming, pentesting, and vulnerability analysis — no unrelated services." },
+    { icon: Users, title: "Client Success", description: "Your security is our priority. Every report is documented, prioritized, and matched to the right defender." },
     { icon: ShieldAlert, title: "Red Team First", description: "We think like attackers. We find vulnerabilities through red teaming — then connect you with the right defender for each issue." },
-    { icon: Award, title: "Quality Excellence", description: "Every AI and security engagement meets the highest standards of performance and reliability." },
+    { icon: Award, title: "Quality Excellence", description: "Every red team engagement and Pentesting Report meets the highest standards of accuracy and reliability." },
   ]
 
   const stats = [
     { number: "500+", label: "Clients Served" },
     { number: "95%", label: "Client Satisfaction" },
-    { number: "24/7", label: "AI & Security Ops" },
-    { number: "60%", label: "Avg. Cost Reduction" },
+    { number: "24/7", label: "AI Recon & Security Ops" },
+    { number: "4", label: "Report Severity Tiers" },
   ]
 
   return (
@@ -46,11 +46,12 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="section-label-dark mb-4 mx-auto w-fit">About 7Trendz Data</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Leading the AI Automation & <span className="gradient-text-brand">Red Teaming</span> Revolution
+            Leading Cybersecurity <span className="gradient-text-brand">Red Teaming</span> in South Africa
           </h1>
           <p className="text-xl text-slate-300 leading-relaxed">
-            We help clients automate with intelligent AI and expose security gaps through red teaming and vulnerability
-            analysis — then connect each issue to the defender best suited to fix it.
+            We expose security gaps through red teaming, pentesting, and vulnerability analysis — then connect each
+            issue to the defender best suited to fix it. Every engagement is delivered as a severity-priced Pentesting
+            Report.
           </p>
         </div>
       </section>
@@ -78,8 +79,9 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent>
               <p className="text-slate-600 text-lg leading-relaxed">
-                To make AI automation and red team vulnerability discovery accessible to every business — finding
-                security gaps and connecting clients with the right defender for each issue we uncover.
+                To make red teaming and vulnerability discovery accessible to every business — finding security gaps,
+                documenting them in a severity-priced Pentesting Report, and connecting clients with the right defender
+                for each issue we uncover.
               </p>
             </CardContent>
           </Card>
@@ -92,7 +94,7 @@ export default function AboutPage() {
             <CardContent>
               <p className="text-slate-600 text-lg leading-relaxed">
                 To be the go-to red team partner — where every vulnerability is found, documented, and routed to
-                the right defender, while AI automation handles the rest.
+                the right defender through a severity-priced Pentesting Report.
               </p>
             </CardContent>
           </Card>
@@ -105,7 +107,7 @@ export default function AboutPage() {
           <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
             <p>Founded in 2024, 7Trendz Data emerged from a clear insight: clients need someone to find their vulnerabilities through red teaming — not another defender selling generic fixes.</p>
             <p>We built a company that red teams your environment, analyzes every gap with AI, and connects you with the right specialist defender based on each specific issue.</p>
-            <p>Today we serve clients with AI automation, pentesting, red teaming, vulnerability analysis, and expert defender matching across industries.</p>
+            <p>Today we serve clients with pentesting, red teaming, vulnerability analysis, and expert defender matching — every engagement delivered as a Pentesting Report priced by severity.</p>
           </div>
         </div>
       </section>
@@ -143,7 +145,7 @@ export default function AboutPage() {
               <Link href="/contact">Start Your Project <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-              <Link href="/contact?interest=security"><Shield className="mr-2 h-4 w-4" />Book Red Team Assessment</Link>
+              <Link href="/contact?interest=security"><ShieldCheck className="mr-2 h-4 w-4" />Book Red Team Assessment</Link>
             </Button>
           </div>
         </div>

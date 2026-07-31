@@ -9,22 +9,20 @@ const SITE_NAME = "7Trendz Data"
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    default: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
     template: "%s | 7Trendz Data",
   },
   description:
-    "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders for pentesting, AI recon agents, and expert referrals.",
+    "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity — then connect you with the right defender.",
   keywords: [
     "red teaming South Africa",
     "cybersecurity South Africa",
-    "AI automation",
     "penetration testing",
+    "pentesting report",
     "vulnerability assessment",
-    "agentic AI",
     "defender matching",
     "security consulting Johannesburg",
     "ethical hacking South Africa",
-    "AI agents for business",
     "red team assessment",
     "cyber security services",
   ],
@@ -41,23 +39,23 @@ export const metadata: Metadata = {
     locale: "en_ZA",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    title: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
     description:
-      "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders.",
+      "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity.",
     images: [
       {
         url: "/images/7trendz-logo-final.png",
         width: 1200,
         height: 630,
-        alt: "7Trendz Data — AI Automation & Red Teaming",
+        alt: "7Trendz Data — Cybersecurity & Red Teaming",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "7Trendz Data — AI Automation & Red Teaming in South Africa",
+    title: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
     description:
-      "South Africa's leading cybersecurity red teaming and AI automation company. We identify security vulnerabilities, deploy AI-powered automation, and connect you with the right defenders.",
+      "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity.",
     images: ["/images/7trendz-logo-final.png"],
     creator: "@7trendzdata",
   },
@@ -95,7 +93,7 @@ export default function RootLayout({
     url: SITE_URL,
     logo: `${SITE_URL}/images/7trendz-logo-final.png`,
     description:
-      "South Africa's leading cybersecurity red teaming and AI automation company.",
+      "South Africa's leading cybersecurity red teaming company.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Johannesburg",
@@ -117,24 +115,32 @@ export default function RootLayout({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Red Team Assessment",
-          description: "Comprehensive red team engagement to identify real-world security vulnerabilities.",
+          name: "Pentesting Report — Low Vulnerability",
+          description: "Pentesting report covering low-severity findings.",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "AI Automation",
-          description: "Custom AI agents and automation solutions for business processes.",
+          name: "Pentesting Report — Medium Vulnerability",
+          description: "Pentesting report covering medium-severity findings.",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Penetration Testing",
-          description: "Professional penetration testing and vulnerability assessment services.",
+          name: "Pentesting Report — High Vulnerability",
+          description: "Pentesting report covering high-severity findings.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Pentesting Report — Critical Vulnerability",
+          description: "Pentesting report covering critical-severity findings.",
         },
       },
     ],

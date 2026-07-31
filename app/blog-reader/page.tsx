@@ -30,8 +30,6 @@ interface BlogPost {
 
 const CATEGORY_META: Record<string, { icon: string; gradient: string; text: string; bg: string; border: string }> = {
   Cybersecurity: { icon: "🛡️", gradient: "from-red-500 to-rose-600", text: "text-red-600", bg: "bg-red-50", border: "border-red-100" },
-  "AI Automation": { icon: "🤖", gradient: "from-blue-500 to-indigo-600", text: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
-  "Agentic AI": { icon: "🧠", gradient: "from-purple-500 to-violet-600", text: "text-purple-600", bg: "bg-purple-50", border: "border-purple-100" },
   "Red Teaming": { icon: "🎯", gradient: "from-orange-500 to-red-600", text: "text-orange-600", bg: "bg-orange-50", border: "border-orange-100" },
   "Vulnerability Analysis": { icon: "🔍", gradient: "from-amber-500 to-yellow-600", text: "text-amber-600", bg: "bg-amber-50", border: "border-amber-100" },
   "Defender Matching": { icon: "🤝", gradient: "from-cyan-500 to-teal-600", text: "text-cyan-600", bg: "bg-cyan-50", border: "border-cyan-100" },
@@ -199,7 +197,7 @@ export default function BlogReader() {
           {/* CTA */}
           <div className="mt-16 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl text-center">
             <h3 className="text-xl font-bold text-white mb-2">Need a security assessment?</h3>
-            <p className="text-white/50 mb-6 text-sm">Get expert red teaming and AI automation consulting for your business.</p>
+            <p className="text-white/50 mb-6 text-sm">Get expert red teaming, pentesting, and vulnerability analysis for your business.</p>
             <div className="flex items-center justify-center gap-3">
               <Link href="/contact">
                 <Button className="bg-white text-slate-900 hover:bg-slate-100 rounded-xl font-semibold">

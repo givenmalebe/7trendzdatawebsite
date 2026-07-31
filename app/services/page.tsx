@@ -2,39 +2,34 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
-  Phone,
-  Search,
-  MessageSquare,
-  Brain,
-  Palette,
-  Zap,
-  CheckCircle,
-  Star,
-  Globe,
-  MapPin,
-  Bot,
-  Mail,
   Shield,
   ShieldAlert,
   Crosshair,
   Bug,
   Radar,
   UserCheck,
+  CheckCircle,
+  Star,
+  Mail,
+  FileText,
+  Repeat,
+  ClipboardCheck,
 } from "lucide-react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CyberBackground } from "@/components/cyber-background"
+import { PENTEST_REPORT_TIERS } from "@/lib/catalog"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Cybersecurity red teaming, AI automation, penetration testing, vulnerability analysis, and defender matching services. Expert security consulting for South African businesses.",
+    "Cybersecurity red teaming, penetration testing, and vulnerability analysis. All engagements are delivered as a Pentesting Report priced by the severity of the vulnerabilities found.",
   openGraph: {
     title: "Our Services — 7Trendz Data",
     description:
-      "Cybersecurity red teaming, AI automation, penetration testing, vulnerability analysis, and defender matching services.",
+      "Cybersecurity red teaming, penetration testing, and vulnerability analysis. Pentesting reports priced by severity.",
     url: "https://7trendzdata.com/services",
   },
   alternates: {
@@ -45,135 +40,8 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   const services = [
     {
-      icon: Phone,
-      title: "AI Receptionist",
-      description: "24/7 intelligent virtual receptionist that never misses a call",
-      color: "bg-blue-500",
-      features: [
-        "24/7 Call Handling",
-        "Appointment Scheduling",
-        "Customer Information Collection",
-        "Multi-language Support",
-        "CRM Integration",
-        "Call Analytics & Reporting",
-        "Custom Greeting Messages",
-        "Voicemail Transcription",
-      ],
-      benefits: [
-        "Never miss important calls",
-        "Reduce staffing costs",
-        "Improve customer satisfaction",
-        "Professional image 24/7",
-      ],
-    },
-    {
-      icon: Search,
-      title: "AI SEO Optimization",
-      description: "Advanced AI-powered SEO that boosts your search rankings automatically",
-      color: "bg-green-500",
-      features: [
-        "Automated Keyword Research",
-        "Content Optimization",
-        "Technical SEO Audits",
-        "Competitor Analysis",
-        "Local SEO Enhancement",
-        "Performance Tracking",
-        "Content Generation",
-        "Link Building Strategies",
-      ],
-      benefits: [
-        "Higher search rankings",
-        "Increased organic traffic",
-        "Better ROI on content",
-        "Automated optimization",
-      ],
-    },
-    {
-      icon: MessageSquare,
-      title: "AI Chatbots",
-      description: "Intelligent conversational AI for customer support and lead generation",
-      color: "bg-purple-500",
-      features: [
-        "Natural Language Processing",
-        "Multi-platform Integration",
-        "Lead Qualification",
-        "Customer Support Automation",
-        "E-commerce Integration",
-        "Appointment Booking",
-        "FAQ Automation",
-        "Sentiment Analysis",
-      ],
-      benefits: [
-        "Instant customer responses",
-        "24/7 availability",
-        "Increased lead conversion",
-        "Reduced support costs",
-      ],
-    },
-    {
-      icon: Brain,
-      title: "Custom AI Models",
-      description: "Tailored machine learning models built for your specific business needs",
-      color: "bg-orange-500",
-      features: [
-        "Predictive Analytics",
-        "Computer Vision Solutions",
-        "Natural Language Processing",
-        "Recommendation Systems",
-        "Fraud Detection",
-        "Demand Forecasting",
-        "Custom Training Data",
-        "Model Deployment & Monitoring",
-      ],
-      benefits: [
-        "Solve unique business problems",
-        "Competitive advantage",
-        "Data-driven decisions",
-        "Scalable solutions",
-      ],
-    },
-    {
-      icon: Palette,
-      title: "AI-Powered UI/UX Design",
-      description: "Revolutionary design platforms that create stunning interfaces automatically",
-      color: "bg-pink-500",
-      features: [
-        "Automated Design Generation",
-        "User Behavior Analysis",
-        "A/B Testing Automation",
-        "Responsive Design Creation",
-        "Brand Consistency Checks",
-        "Accessibility Optimization",
-        "Performance Optimization",
-        "Design System Management",
-      ],
-      benefits: [
-        "Faster design process",
-        "Data-driven design decisions",
-        "Improved user experience",
-        "Consistent branding",
-      ],
-    },
-    {
-      icon: Zap,
-      title: "Business Process Automation",
-      description: "End-to-end automation of your business workflows and operations",
-      color: "bg-indigo-500",
-      features: [
-        "Workflow Automation",
-        "Document Processing",
-        "Data Entry Automation",
-        "Email Marketing Automation",
-        "Inventory Management",
-        "Financial Process Automation",
-        "Customer Onboarding",
-        "Reporting Automation",
-      ],
-      benefits: ["Increased efficiency", "Reduced human error", "Cost savings", "Scalable operations"],
-    },
-    {
       icon: Shield,
-      title: "Vulnerability Advisory for SMEs",
+      title: "Vulnerability Advisory",
       description: "Red team-led assessments that uncover security gaps — we connect you with the right defender for each issue, we don't remediate ourselves",
       color: "bg-red-500",
       features: [
@@ -196,7 +64,7 @@ export default function ServicesPage() {
     {
       icon: Crosshair,
       title: "Penetration Testing",
-      description: "Simulated real-world attacks that uncover exploitable weaknesses before attackers find them",
+      description: "Simulated real-world attacks that uncover exploitable weaknesses before attackers find them — delivered as a severity-priced Pentesting Report",
       color: "bg-red-600",
       features: [
         "Web Application Pentesting",
@@ -314,20 +182,62 @@ export default function ServicesPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="section-label-dark mb-4 mx-auto w-fit">Services</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            AI Automation & <span className="gradient-text-security">Red Teaming</span>
+            Cybersecurity & <span className="gradient-text-security">Red Teaming</span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-            Automate with intelligent AI. Expose gaps through red teaming and vulnerability analysis. We connect
-            you with the right defender for every issue we find.
+            Every engagement is delivered as a Pentesting Report, priced by the highest severity of vulnerability we
+            find. We expose the gaps — then connect you with the right defender for each issue.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg">
-              <Link href="/contact"><Mail className="mr-2 h-5 w-5" />Get Custom Quote</Link>
+              <Link href="/contact#pricing"><FileText className="mr-2 h-5 w-5" />See Pentesting Report Pricing</Link>
             </Button>
             <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white">
               <Link href="/contact?interest=security">Book Red Team Assessment</Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Pentesting Report Pricing */}
+      <section id="pricing" className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="section-label mb-4 mx-auto w-fit">Pricing</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Pentesting Report Pricing</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              We only offer cybersecurity. Every engagement is delivered as a Pentesting Report, priced by the highest
+              severity of vulnerability found.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {PENTEST_REPORT_TIERS.map((tier) => (
+              <Card key={tier.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`h-3 w-3 rounded-full ${tier.dot}`} />
+                    <Badge variant="outline" className={`border ${tier.badge}`}>{tier.severity}</Badge>
+                  </div>
+                  <CardTitle className="text-xl">{tier.label}</CardTitle>
+                  <CardDescription className="text-slate-600">{tier.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-4xl font-bold text-slate-900">
+                    R{tier.defaultPrice.toLocaleString()}
+                  </p>
+                  <Button asChild className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white">
+                    <Link href="/contact?interest=security">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Get This Report
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-8">
+            Price reflects the highest severity vulnerability documented in your Pentesting Report. No hidden fees.
+          </p>
         </div>
       </section>
 
@@ -402,19 +312,22 @@ export default function ServicesPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Additional Services</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Additional Cybersecurity Services</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Enhance your AI automation and security posture
+              Enhance your security posture around every Pentesting Report
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "AI Training & Consultation", description: "Expert guidance on AI implementation and team training" },
-              { title: "Custom Integration", description: "Seamless integration with your existing systems and workflows" },
-              { title: "24/7 Support & Monitoring", description: "Round-the-clock monitoring for AI systems and security agents" },
+              { icon: ClipboardCheck, title: "Compliance & Audit Support", description: "PCI-DSS, POPIA, and ISO 27001 readiness guidance based on your findings" },
+              { icon: Repeat, title: "Retesting & Verification", description: "We verify that each fixed finding is genuinely resolved before sign-off" },
+              { icon: UserCheck, title: "Defender Matching", description: "We connect you with the right specialist to fix every issue we find" },
             ].map((addon, index) => (
               <Card key={index} className="text-center border-0 shadow-lg bg-white">
                 <CardHeader>
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mx-auto mb-2">
+                    <addon.icon className="h-6 w-6 text-red-600" />
+                  </div>
                   <CardTitle className="text-xl">{addon.title}</CardTitle>
                   <CardDescription>{addon.description}</CardDescription>
                 </CardHeader>
@@ -433,15 +346,16 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-700">
+      <section className="py-20 bg-gradient-to-r from-red-600 to-orange-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to get started?</h2>
-          <p className="text-xl text-cyan-100 mb-8">
-            Contact us for AI automation, red teaming, or defender matching tailored to your needs.
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to find your gaps?</h2>
+          <p className="text-xl text-red-100 mb-8">
+            Book a red team assessment today. Your Pentesting Report is priced by severity — from R2,500 for low
+            findings to R15,000 for critical ones.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100">
-              <Link href="/contact"><Mail className="mr-2 h-5 w-5" />Get Custom Quote</Link>
+            <Button asChild size="lg" className="bg-white text-red-700 hover:bg-slate-100">
+              <Link href="/contact"><Mail className="mr-2 h-5 w-5" />Book a Pentesting Report</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
               <Link href="mailto:info@7trendzdata.com"><Mail className="mr-2 h-5 w-5" />info@7trendzdata.com</Link>

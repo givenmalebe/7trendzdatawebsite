@@ -3,11 +3,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Article",
   description:
-    "Read the latest cybersecurity, AI automation, and red teaming insights from 7Trendz Data — South Africa's leading security experts.",
+    "Read the latest cybersecurity, red teaming, and vulnerability analysis insights from 7Trendz Data — South Africa's leading security experts.",
   openGraph: {
     title: "Article | 7Trendz Data",
     description:
-      "Read the latest cybersecurity, AI automation, and red teaming insights.",
+      "Read the latest cybersecurity, red teaming, and vulnerability analysis insights.",
     url: "https://7trendzdata.com/blog-reader",
     type: "article",
   },

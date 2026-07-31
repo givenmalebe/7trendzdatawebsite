@@ -9,11 +9,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, Shield, Bot, UserCheck } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, Shield, UserCheck, Crosshair } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CyberBackground } from "@/components/cyber-background"
 import { submitContactMessage } from "@/lib/contact-service"
+import { PENTEST_REPORT_TIERS } from "@/lib/catalog"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -77,7 +79,8 @@ export default function ContactPage() {
           <div className="section-label-dark mb-4 mx-auto w-fit">Contact</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Get in Touch</h1>
           <p className="text-xl text-slate-300 leading-relaxed">
-            Have questions about AI automation, red teaming, or vulnerability analysis? We find the gaps and connect you with the right defender.
+            Have questions about cybersecurity, red teaming, or vulnerability analysis? We find the gaps and connect
+            you with the right defender — every engagement is delivered as a severity-priced Pentesting Report.
           </p>
         </div>
       </section>
@@ -250,10 +253,10 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {[
-                    { icon: Bot, text: "Expert AI automation for client growth" },
                     { icon: Shield, text: "Red teaming & vulnerability discovery" },
                     { icon: UserCheck, text: "Defender matching for every issue we find" },
-                    { icon: CheckCircle, text: "24/7 AI and security monitoring" },
+                    { icon: Crosshair, text: "Pentesting Reports priced by severity" },
+                    { icon: CheckCircle, text: "24/7 AI recon and security monitoring" },
                   ].map((item) => (
                     <div key={item.text} className="flex items-start gap-2">
                       <item.icon className="h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" />
@@ -264,6 +267,44 @@ export default function ContactPage() {
               </Card>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Pentesting Report Pricing */}
+      <section id="pricing" className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="section-label mb-4 mx-auto w-fit">Pricing</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Pentesting Report Pricing</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report, priced by the
+              highest severity of vulnerability found.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {PENTEST_REPORT_TIERS.map((tier) => (
+              <Card key={tier.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`h-3 w-3 rounded-full ${tier.dot}`} />
+                    <Badge variant="outline" className={`border ${tier.badge}`}>{tier.severity}</Badge>
+                  </div>
+                  <CardTitle className="text-xl">{tier.label}</CardTitle>
+                  <CardDescription className="text-slate-600">{tier.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-4xl font-bold text-slate-900">
+                    R{tier.defaultPrice.toLocaleString()}
+                  </p>
+                  <p className="text-sm text-slate-500">One-time Pentesting Report fee</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-slate-500 mt-8">
+            Price reflects the highest severity vulnerability documented in your Pentesting Report. Contact us to book
+            your assessment — we'll respond within 24 hours.
+          </p>
         </div>
       </section>
 
@@ -286,12 +327,25 @@ export default function ContactPage() {
 
             <Card className="border shadow-sm bg-white">
               <CardHeader>
-                <CardTitle className="text-lg">Do you offer custom pricing?</CardTitle>
+                <CardTitle className="text-lg">How is your pricing structured?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  Yes! We provide custom quotes tailored to your specific business needs and goals. Contact us to
-                  discuss your requirements.
+                  We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report, priced by
+                  the highest severity of vulnerability we find: Low R2,500, Medium R5,000, High R10,000, and Critical
+                  R15,000. No hidden fees — you know exactly what your report will cost before we start.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border shadow-sm bg-white">
+              <CardHeader>
+                <CardTitle className="text-lg">What does the Pentesting Report include?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-slate-600">
+                  Every report documents the vulnerabilities we find, prioritized by severity, with remediation guidance
+                  and issue-specific defender matching so you know exactly who to engage to fix each finding.
                 </p>
               </CardContent>
             </Card>
@@ -302,8 +356,8 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  We work with businesses across all industries including healthcare, finance, retail, real estate, and
-                  more. Our AI solutions are customizable to any sector.
+                  We work with businesses across all industries including healthcare, finance, retail, and real estate.
+                  Our cybersecurity assessments are tailored to any sector.
                 </p>
               </CardContent>
             </Card>

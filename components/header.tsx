@@ -30,7 +30,7 @@ export function Header() {
             <div className="flex flex-col leading-tight">
               <span className="text-xl font-bold text-slate-900">7Trendz Data</span>
               <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-widest text-cyan-600">
-                AI & Red Teaming
+                Cybersecurity & Red Teaming
               </span>
             </div>
           </Link>

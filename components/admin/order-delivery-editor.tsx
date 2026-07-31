@@ -95,7 +95,7 @@ export function OrderDeliveryEditor({ order, onSaved }: OrderDeliveryEditorProps
         </div>
         <div>
           <Label>Message to client (visible in portal)</Label>
-          <Textarea value={clientUpdate} onChange={(e) => setClientUpdate(e.target.value)} rows={3} placeholder="e.g. Your AI receptionist is in testing..." />
+          <Textarea value={clientUpdate} onChange={(e) => setClientUpdate(e.target.value)} rows={3} placeholder="e.g. Your pentesting report is in progress..." />
         </div>
         <div>
           <Label>Milestones</Label>

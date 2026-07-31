@@ -14,11 +14,11 @@ import {
   User,
   Minimize2,
   Maximize2,
-  Phone,
-  Search,
-  Palette,
-  Brain,
-  Zap,
+  ShieldAlert,
+  Crosshair,
+  Radar,
+  Bug,
+  FileText,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { sanitizeHTML } from "@/lib/sanitize"
@@ -45,15 +45,15 @@ export function AIChatbot() {
     {
       id: "1",
       content:
-        "👋 Hello! I'm your AI automation assistant from 7Trendz Data. I can help you discover how our AI solutions can transform your business:\n\n🤖 **AI Receptionist** - Never miss a call again ($699/month)\n🔍 **AI SEO** - Boost your search rankings automatically ($499/month)\n💬 **AI Chatbots** - 24/7 customer support ($199/month)\n🧠 **Custom AI Models** - Tailored solutions ($2,999/project)\n🎨 **AI UI/UX Design** - Automated design generation ($799/month)\n⚡ **Process Automation** - Streamline operations ($899/month)\n\n🚀 **SPECIAL COMBO**: Complete Business Growth Package - High-converting website + Google Maps SEO + AI Receptionist for just $999/month (Save $199!)\n\nWhat would you like to know about AI automation for your business?",
+        "👋 Hello! I'm your cybersecurity assistant from 7Trendz Data. We only offer cybersecurity services — every engagement is delivered as a **Pentesting Report** priced by the highest severity of vulnerability we find:\n\n🟢 **Low Severity** - R2,500\n🟡 **Medium Severity** - R5,000\n🟠 **High Severity** - R10,000\n🔴 **Critical Severity** - R15,000\n\nWe're red teamers, not defenders — we expose the gaps and connect you with the right defender for each issue. What would you like to know?",
       role: "assistant",
       timestamp: new Date().toISOString(),
       suggestions: [
-        "Tell me about the Complete Business Growth Package",
-        "How does the AI Receptionist work?",
-        "What's included in Google Maps SEO?",
-        "Show me the high-converting website features",
-        "I want the $999 combo deal",
+        "Tell me about your Pentesting Report pricing",
+        "How does a Red Team Assessment work?",
+        "What is AI Vulnerability Analysis?",
+        "How does Defender Matching work?",
+        "Book a Red Team Assessment",
       ],
     },
   ])
@@ -65,40 +65,40 @@ export function AIChatbot() {
 
   const quickActions: QuickAction[] = [
     {
-      icon: Phone,
-      label: "AI Receptionist",
-      message: "Tell me about your AI Receptionist service and how it can help my business",
-      color: "bg-blue-500",
+      icon: Crosshair,
+      label: "Penetration Testing",
+      message: "Tell me about your penetration testing service and how it works",
+      color: "bg-red-600",
     },
     {
-      icon: Search,
-      label: "AI SEO",
-      message: "How does your AI SEO optimization work and what results can I expect?",
-      color: "bg-green-500",
+      icon: ShieldAlert,
+      label: "Red Teaming",
+      message: "What does a full Red Team Assessment involve?",
+      color: "bg-orange-600",
     },
     {
-      icon: Brain,
-      label: "Custom AI",
-      message: "I need a custom AI solution for my specific business needs",
-      color: "bg-orange-500",
+      icon: Radar,
+      label: "AI Recon",
+      message: "How do your AI recon agents map my attack surface?",
+      color: "bg-cyan-600",
     },
     {
-      icon: Palette,
-      label: "AI Design",
-      message: "Tell me about your AI-powered UI/UX design platform",
-      color: "bg-pink-500",
+      icon: Bug,
+      label: "Vuln Analysis",
+      message: "How does AI vulnerability analysis prioritize my findings?",
+      color: "bg-purple-600",
     },
     {
-      icon: Zap,
-      label: "Get Quote",
-      message: "I'd like to get a custom quote for AI automation services",
-      color: "bg-purple-500",
+      icon: FileText,
+      label: "Pricing",
+      message: "Show me your Pentesting Report pricing tiers",
+      color: "bg-blue-600",
     },
     {
-      icon: Zap,
-      label: "Growth Combo",
-      message: "Tell me about your Complete Business Growth Package for $999/month",
-      color: "bg-gradient-to-r from-green-500 to-blue-500",
+      icon: FileText,
+      label: "Book Report",
+      message: "I'd like to book a red team assessment / pentesting report",
+      color: "bg-gradient-to-r from-cyan-500 to-blue-600",
     },
   ]
 
@@ -203,7 +203,7 @@ export function AIChatbot() {
           const errorMessage: Message = {
             id: (Date.now() + 1).toString(),
             content:
-              "🚨 I'm experiencing high demand right now! While I get back online, you can:\n\n📧 Email us directly: info@7trendzdata.com\n📞 Call us: +27 736 289 188\n💬 Or try asking your question again in a moment\n\nOur AI automation solutions are worth the wait! 🤖✨",
+              "🚨 I'm experiencing high demand right now! While I get back online, you can:\n\n📧 Email us directly: info@7trendzdata.com\n📞 Call us: +27 736 289 188\n💬 Or try asking your question again in a moment\n\nOur cybersecurity and red teaming solutions are worth the wait! 🔒✨",
             role: "assistant",
             timestamp: new Date().toISOString(),
             suggestions: ["Contact us directly", "Try again", "View our services"],
@@ -222,44 +222,47 @@ export function AIChatbot() {
     const lowerMessage = userMessage.toLowerCase()
     const lowerResponse = aiResponse.toLowerCase()
 
-    if (lowerMessage.includes("combo") || lowerMessage.includes("package") || lowerMessage.includes("growth")) {
+    if (lowerMessage.includes("pricing") || lowerMessage.includes("price") || lowerMessage.includes("cost")) {
       return [
-        "What's included in the combo?",
-        "How much do I save with the package?",
-        "Can I customize the combo?",
-        "Schedule combo consultation",
+        "What determines my report price?",
+        "How much for a critical finding?",
+        "Are there any hidden fees?",
+        "Book a pentesting report",
       ]
     }
 
-    if (lowerMessage.includes("receptionist") || lowerMessage.includes("call")) {
+    if (lowerMessage.includes("red team") || lowerMessage.includes("assessment")) {
       return [
-        "What's the setup process?",
-        "Can it integrate with my CRM?",
-        "Show me pricing details",
-        "Schedule a demo",
+        "What does the assessment cover?",
+        "How long does it take?",
+        "What's included in the report?",
+        "Book a Red Team Assessment",
       ]
-    } else if (lowerMessage.includes("seo") || lowerMessage.includes("search")) {
-      return ["How long to see results?", "What about local SEO?", "Compare with other tools", "Get SEO audit"]
-    } else if (lowerMessage.includes("chatbot") || lowerMessage.includes("chat")) {
-      return ["Can it handle complex queries?", "Multi-language support?", "Integration options", "See chatbot demo"]
-    } else if (lowerMessage.includes("custom") || lowerMessage.includes("model")) {
+    } else if (lowerMessage.includes("recon") || lowerMessage.includes("scan") || lowerMessage.includes("attack surface")) {
+      return ["How do AI recon agents work?", "What do you discover?", "How fast is the scan?", "Get a recon demo"]
+    } else if (lowerMessage.includes("vulnerab") || lowerMessage.includes("severity")) {
       return [
-        "What's the development timeline?",
-        "Do you provide training?",
-        "Ongoing support options",
-        "Similar case studies",
+        "How do you prioritize findings?",
+        "What is a critical vulnerability?",
+        "How is severity determined?",
+        "See the pricing tiers",
       ]
-    } else if (lowerMessage.includes("design") || lowerMessage.includes("ui")) {
+    } else if (lowerMessage.includes("defender") || lowerMessage.includes("fix") || lowerMessage.includes("remediat")) {
       return [
-        "See design examples",
-        "How does AI create designs?",
-        "Brand consistency features",
-        "A/B testing capabilities",
+        "How does defender matching work?",
+        "Who are your defender specialists?",
+        "Do you fix issues yourselves?",
+        "Request defender matching",
       ]
-    } else if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("quote")) {
-      return ["Schedule consultation", "Compare service packages", "ROI calculator", "Payment options"]
+    } else if (lowerMessage.includes("pentest") || lowerMessage.includes("penetration") || lowerMessage.includes("test")) {
+      return [
+        "What do you test?",
+        "What methods do you use?",
+        "What does the report include?",
+        "Book a penetration test",
+      ]
     } else {
-      return ["Tell me about pricing", "Schedule a consultation", "See case studies", "Compare all services"]
+      return ["Tell me about pricing", "Book a Red Team Assessment", "See case studies", "Compare all services"]
     }
   }
 
@@ -283,7 +286,7 @@ export function AIChatbot() {
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-16 w-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
+          className="h-16 w-16 rounded-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
           size="icon"
         >
           <MessageCircle className="h-7 w-7 text-white" />
@@ -294,7 +297,7 @@ export function AIChatbot() {
           </div>
         </div>
         <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-          <Badge className="bg-blue-600 text-white text-xs px-2 py-1 whitespace-nowrap">AI Automation Help</Badge>
+          <Badge className="bg-red-600 text-white text-xs px-2 py-1 whitespace-nowrap">Cybersecurity Help</Badge>
         </div>
       </div>
     )
@@ -307,14 +310,14 @@ export function AIChatbot() {
           isMinimized ? "h-16" : "h-[600px] max-h-[85vh]"
         }`}
       >
-        <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg">
+        <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-t-lg">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
               <Bot className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-sm font-semibold">AI Automation Assistant</CardTitle>
-              <p className="text-xs text-blue-100">7Trendz Data • Online</p>
+              <CardTitle className="text-sm font-semibold">Cybersecurity Assistant</CardTitle>
+              <p className="text-xs text-red-100">7Trendz Data • Online</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -367,13 +370,13 @@ export function AIChatbot() {
                   <div
                     className={`max-w-[85%] rounded-lg p-3 ${
                       message.role === "user"
-                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                        ? "bg-gradient-to-r from-red-600 to-orange-600 text-white"
                         : "bg-gray-100 text-gray-900 border"
                     }`}
                   >
                     <div className="flex items-start space-x-2">
                       {message.role === "assistant" && (
-                        <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-6 h-6 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Bot className="h-3 w-3 text-white" />
                         </div>
                       )}
@@ -383,7 +386,7 @@ export function AIChatbot() {
                           className="text-sm whitespace-pre-wrap"
                           dangerouslySetInnerHTML={{ __html: sanitizeHTML(formatMessage(message.content)) }}
                         />
-                        <p className={`text-xs mt-2 ${message.role === "user" ? "text-blue-100" : "text-gray-500"}`}>
+                        <p className={`text-xs mt-2 ${message.role === "user" ? "text-red-100" : "text-gray-500"}`}>
                           {formatTime(message.timestamp)}
                         </p>
 
@@ -396,7 +399,7 @@ export function AIChatbot() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => handleSuggestionClick(suggestion)}
-                                className="text-xs h-7 mr-1 mb-1 bg-white hover:bg-blue-50 border-blue-200 text-blue-700"
+                                className="text-xs h-7 mr-1 mb-1 bg-white hover:bg-red-50 border-red-200 text-red-700"
                               >
                                 {suggestion}
                               </Button>
@@ -413,17 +416,17 @@ export function AIChatbot() {
                 <div className="flex justify-start">
                   <div className="bg-gray-100 rounded-lg p-3 max-w-[85%] border">
                     <div className="flex items-center space-x-2">
-                      <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                      <div className="w-6 h-6 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center">
                         <Bot className="h-3 w-3 text-white" />
                       </div>
                       <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce"></div>
                         <div
-                          className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"
+                          className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
                           style={{ animationDelay: "0.1s" }}
                         ></div>
                         <div
-                          className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
+                          className="w-2 h-2 bg-red-400 rounded-full animate-bounce"
                           style={{ animationDelay: "0.2s" }}
                         ></div>
                       </div>
@@ -443,14 +446,14 @@ export function AIChatbot() {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask about AI automation..."
+                  placeholder="Ask about our cybersecurity services..."
                   disabled={isLoading}
-                  className="flex-1 border-gray-300 focus:border-blue-500"
+                  className="flex-1 border-gray-300 focus:border-red-500"
                 />
                 <Button
                   onClick={() => sendMessage()}
                   disabled={!inputMessage.trim() || isLoading}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
                   size="icon"
                 >
                   <Send className="h-4 w-4" />

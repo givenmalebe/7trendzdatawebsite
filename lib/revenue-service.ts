@@ -82,7 +82,7 @@ function normalizeEntry(id: string, data: Record<string, unknown>): RevenueEntry
     deliveryStatus: (entry.deliveryStatus as DeliveryStatus) || "ordered",
     deliveryProgress: entry.deliveryProgress ?? 0,
     clientUpdate: entry.clientUpdate || "",
-    milestones: entry.milestones || defaultMilestonesForCategory(entry.category || "AI Automation"),
+    milestones: entry.milestones || defaultMilestonesForCategory(entry.category || "Red Team"),
     updated_at: entry.updated_at || entry.created_at || new Date().toISOString(),
   }
 }

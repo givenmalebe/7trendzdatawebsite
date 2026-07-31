@@ -22,7 +22,7 @@ export function SimpleAIChat() {
     {
       id: "1",
       content:
-        "Hello! I'm your AI assistant for 7Trendz Data. I can help you with questions about our AI automation services, pricing, features, or anything else you'd like to know. How can I assist you today?",
+        "Hello! I'm your cybersecurity assistant for 7Trendz Data. We only offer cybersecurity services — red teaming, penetration testing, and vulnerability analysis. Every engagement is delivered as a Pentesting Report priced from R2,500 (low severity) to R15,000 (critical). How can I assist you today?",
       role: "assistant",
       timestamp: new Date().toISOString(),
     },

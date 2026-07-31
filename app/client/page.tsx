@@ -197,7 +197,7 @@ function ClientContent() {
             {view === "reports" && "Red Team Reports"}
           </h1>
           <p className="text-muted-foreground mt-1">
-            {view === "dashboard" && "Track everything you've ordered — AI automation, red team, and more."}
+            {view === "dashboard" && "Track your red team engagements, pentesting reports, and defender matches."}
             {view === "services" && "Progress, milestones, and updates from 7Trendz Data on your projects."}
             {view === "reports" && "Penetration testing progress and downloadable reports."}
           </p>
@@ -277,7 +277,7 @@ function ClientContent() {
                 <CardContent className="py-12 text-center">
                   <Bot className="h-12 w-12 mx-auto text-slate-300 mb-4" />
                   <p className="text-muted-foreground">No services or products on your account yet.</p>
-                  <p className="text-sm text-muted-foreground mt-2">AI receptionist, chatbots, automation, SEO, and more will appear here once ordered.</p>
+                  <p className="text-sm text-muted-foreground mt-2">Pentesting reports, red team engagements, and more will appear here once ordered.</p>
                 </CardContent>
               </Card>
             ) : (

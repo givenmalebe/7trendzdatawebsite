@@ -104,10 +104,6 @@ export function categoryColor(category: string) {
   switch (category) {
     case "Red Team":
       return "bg-red-100 text-red-800 border-red-200"
-    case "AI Automation":
-      return "bg-cyan-100 text-cyan-800 border-cyan-200"
-    case "Bundle":
-      return "bg-violet-100 text-violet-800 border-violet-200"
     default:
       return "bg-slate-100 text-slate-800 border-slate-200"
   }

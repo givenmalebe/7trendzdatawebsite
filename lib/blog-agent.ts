@@ -44,8 +44,6 @@ export async function generateBlog(
 
 export const BLOG_CATEGORIES = [
   { value: "Cybersecurity", label: "Cybersecurity", icon: "🛡️", color: "red" },
-  { value: "AI Automation", label: "AI Automation", icon: "🤖", color: "blue" },
-  { value: "Agentic AI", label: "Agentic AI", icon: "🧠", color: "purple" },
   { value: "Red Teaming", label: "Red Teaming", icon: "🎯", color: "red" },
   { value: "Vulnerability Analysis", label: "Vulnerability Analysis", icon: "🔍", color: "amber" },
   { value: "Defender Matching", label: "Defender Matching", icon: "🤝", color: "cyan" },
@@ -58,20 +56,6 @@ export const SUGGESTED_TOPICS: Record<string, string[]> = {
     "SOC-as-a-Service: When to Outsource Your Security Operations",
     "Cloud Security Posture Management Best Practices",
     "The Rise of AI-Powered Phishing Attacks",
-  ],
-  "AI Automation": [
-    "How AI Receptionists Are Transforming Customer Service",
-    "Process Automation ROI: Real Numbers from Real Businesses",
-    "AI Chatbots vs Human Support: Finding the Right Balance",
-    "Building Intelligent Document Processing Pipelines",
-    "AI-Powered SEO: Automating Your Way to Page One",
-  ],
-  "Agentic AI": [
-    "What Are AI Agents and Why They Matter for Business",
-    "Multi-Agent Systems: Orchestrating AI Teams for Complex Tasks",
-    "Agentic RAG: Beyond Simple Retrieval-Augmented Generation",
-    "Autonomous AI Agents for Cybersecurity Reconnaissance",
-    "Building Goal-Driven AI Workflows with Agent Frameworks",
   ],
   "Red Teaming": [
     "Red Team vs Penetration Testing: What is the Difference",

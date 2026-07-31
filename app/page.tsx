@@ -5,14 +5,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { Badge } from "@/components/ui/badge"
 import {
   ArrowRight,
-  Bot,
-  Search,
-  MessageSquare,
-  Brain,
-  Palette,
-  Phone,
   TrendingUp,
-  Zap,
   Users,
   CheckCircle,
   Star,
@@ -23,11 +16,10 @@ import {
   ShieldAlert,
   Crosshair,
   Bug,
-  Terminal,
   Radar,
   Lock,
-  Globe,
   UserCheck,
+  FileText,
 } from "lucide-react"
 
 import { useState } from "react"
@@ -37,51 +29,45 @@ import { Footer } from "@/components/footer"
 import { CyberBackground } from "@/components/cyber-background"
 import { HeroVideoBackground } from "@/components/hero-video-background"
 import { LeadForm } from "@/components/lead-form"
+import { PENTEST_REPORT_TIERS } from "@/lib/catalog"
 
 export default function HomePage() {
   const [leadFormOpen, setLeadFormOpen] = useState(false)
   const services = [
     {
-      icon: Phone,
-      title: "AI Receptionist",
-      description: "24/7 intelligent virtual receptionist that handles calls, schedules appointments, and manages customer inquiries.",
-      color: "bg-blue-500",
-      features: ["Call Handling", "Appointment Scheduling", "Customer Support", "Multi-language Support"],
+      icon: Crosshair,
+      title: "Penetration Testing",
+      description: "Simulated real-world attacks against your web apps, networks, and cloud to uncover exploitable weaknesses.",
+      color: "bg-red-600",
+      features: ["Web & API Pentesting", "Network Penetration", "Cloud Security Testing", "Remediation Reports"],
     },
     {
-      icon: Search,
-      title: "AI SEO",
-      description: "Advanced AI-powered SEO optimization that boosts your search rankings and drives organic traffic.",
-      color: "bg-green-500",
-      features: ["Keyword Research", "Content Optimization", "Technical SEO", "Performance Analytics"],
+      icon: ShieldAlert,
+      title: "Red Teaming",
+      description: "Full-scope adversary simulation that tests your people, processes, and technology under pressure.",
+      color: "bg-orange-600",
+      features: ["Adversary Simulation", "Social Engineering", "Physical & Digital Recon", "Defender Handoff Reports"],
     },
     {
-      icon: MessageSquare,
-      title: "AI Chatbots",
-      description: "Intelligent conversational AI that engages customers and provides instant support across all platforms.",
-      color: "bg-purple-500",
-      features: ["Live Chat Support", "Lead Generation", "E-commerce Integration", "Custom Workflows"],
+      icon: Radar,
+      title: "AI Recon Agents",
+      description: "Autonomous AI agents for fast reconnaissance, asset discovery, and continuous attack-surface mapping.",
+      color: "bg-cyan-600",
+      features: ["Automated Asset Discovery", "Attack Surface Mapping", "OSINT Gathering", "24/7 Continuous Recon"],
     },
     {
-      icon: Brain,
-      title: "Custom AI Models",
-      description: "Tailored machine learning models built specifically for your business needs and industry requirements.",
-      color: "bg-orange-500",
-      features: ["Predictive Analytics", "Computer Vision", "NLP", "Custom Training"],
+      icon: Bug,
+      title: "AI Vulnerability Analysis",
+      description: "AI-driven triage that scans, prioritizes, and explains vulnerabilities — so you know exactly what needs fixing and who should fix it.",
+      color: "bg-purple-600",
+      features: ["Automated Vuln Scanning", "Risk Prioritization", "Exploit Scoring", "Issue Documentation"],
     },
     {
-      icon: Palette,
-      title: "AI-Powered UI/UX",
-      description: "Revolutionary design platforms that use AI to create stunning, user-friendly interfaces automatically.",
-      color: "bg-pink-500",
-      features: ["Automated Design", "User Behavior Analysis", "A/B Testing", "Responsive Layouts"],
-    },
-    {
-      icon: Zap,
-      title: "Process Automation",
-      description: "End-to-end business process automation using AI to streamline operations and increase efficiency.",
-      color: "bg-indigo-500",
-      features: ["Workflow Automation", "Document Processing", "Data Integration", "Task Scheduling"],
+      icon: UserCheck,
+      title: "Defender Matching",
+      description: "Based on the vulnerabilities and red team findings we uncover, we connect you with the right defender for each specific issue.",
+      color: "bg-rose-600",
+      features: ["Expert Referral Network", "Issue-Based Matching", "Specialist Routing", "Remediation Guidance"],
     },
     {
       icon: Shield,
@@ -131,10 +117,10 @@ export default function HomePage() {
   ]
 
   const benefits = [
-    { icon: Clock, title: "24/7 Availability", description: "AI systems and security agents work around the clock without breaks." },
-    { icon: TrendingUp, title: "Increased Efficiency", description: "Automate repetitive tasks and boost productivity across your business." },
+    { icon: Clock, title: "24/7 Coverage", description: "AI recon agents and red team analysts watch your attack surface around the clock." },
+    { icon: TrendingUp, title: "Machine-Speed Recon", description: "Autonomous agents map assets and detect exposures far faster than manual assessment." },
     { icon: Users, title: "Expert Defender Matching", description: "Every vulnerability gets routed to the right specialist — not a one-size-fits-all fix." },
-    { icon: Star, title: "Cost Reduction", description: "Reduce operational costs while improving service quality and security." },
+    { icon: Star, title: "Severity-Based Pricing", description: "Pay by the highest severity we find — R2,500 to R15,000 — with no hidden fees." },
   ]
 
   return (
@@ -151,7 +137,7 @@ export default function HomePage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
             </span>
-            AI Automation & Red Teaming
+            Cybersecurity & Red Teaming
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 text-balance drop-shadow-lg">
             <span className="text-red-500">Red Team.</span> Find Vulnerabilities.{" "}
@@ -163,8 +149,9 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/30 h-12 px-8">
-              <Link href="/contact">
-                Start Automating <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/contact#pricing">
+                <FileText className="mr-2 h-5 w-5" />
+                Pentesting Report Pricing
               </Link>
             </Button>
             <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-500/30 h-12 px-8" onClick={() => setLeadFormOpen(true)}>
@@ -175,24 +162,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured package */}
+      {/* Featured package — Pentesting Report Pricing */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-yellow-400 text-yellow-900 text-base px-4 py-1.5 font-semibold">
               Complete Client Solution
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">AI Automation + Red Team Bundle</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Cybersecurity — Delivered as a Pentesting Report</h2>
             <p className="text-xl text-emerald-50 max-w-2xl mx-auto">
-              Grow with AI automation — and know exactly where you&apos;re exposed, with a path to the right defender for every issue
+              Every engagement is priced by the highest severity of vulnerability we find — and matched to the right
+              defender for each issue
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="space-y-5">
               {[
-                { icon: Bot, title: "AI Receptionist 24/7", desc: "Never miss a call — qualifies leads and books appointments automatically.", color: "bg-white/20" },
-                { icon: Crosshair, title: "Red Team Assessment", desc: "We simulate attacks, map your attack surface, and document every vulnerability we find.", color: "bg-white/20" },
+                { icon: Crosshair, title: "Penetration Testing", desc: "We simulate real-world attacks, map your attack surface, and document every vulnerability we find.", color: "bg-white/20" },
+                { icon: Bug, title: "Vulnerability Analysis", desc: "AI-driven triage prioritizes findings by severity and exploit likelihood — every issue documented for handoff.", color: "bg-white/20" },
                 { icon: UserCheck, title: "Defender Matching", desc: "We connect you with the right defender for each issue — based on what we uncover, not generic referrals.", color: "bg-white/20" },
               ].map((item) => (
                 <div key={item.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
@@ -211,30 +199,24 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-2xl bg-white rounded-2xl overflow-hidden">
               <CardHeader className="text-center pb-2 pt-8">
-                <CardTitle className="text-3xl font-bold text-slate-900">Custom Pricing</CardTitle>
-                <CardDescription className="text-base">Tailored to your business needs</CardDescription>
+                <CardTitle className="text-3xl font-bold text-slate-900">Pentesting Report Pricing</CardTitle>
+                <CardDescription className="text-base">Priced by the highest severity vulnerability found</CardDescription>
               </CardHeader>
               <CardHeader className="pt-0">
                 <div className="space-y-3">
-                  {[
-                    "24/7 AI Receptionist & Chatbots",
-                    "Process Automation Setup",
-                    "Red Team Assessment & Pentest",
-                    "Vulnerability Analysis Report",
-                    "Defender Matching per Issue",
-                    "Priority Client Support",
-                  ].map((feature) => (
-                    <div key={feature} className="flex items-center gap-3">
-                      <CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" />
-                      <span className="text-slate-700">{feature}</span>
+                  {PENTEST_REPORT_TIERS.map((tier) => (
+                    <div key={tier.id} className="flex items-center gap-3">
+                      <span className={`h-3 w-3 rounded-full ${tier.dot} shrink-0`} />
+                      <span className="text-slate-700 flex-1">{tier.label}</span>
+                      <span className="text-slate-900 font-bold">R{tier.defaultPrice.toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
                 <div className="space-y-3 mt-8">
                   <Button asChild size="lg" className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white">
-                    <Link href="/contact">
+                    <Link href="/contact#pricing">
                       <Sparkles className="mr-2 h-5 w-5" />
-                      Get Your Custom Quote
+                      Book a Pentesting Report
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="w-full">
@@ -250,14 +232,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AI Services */}
+      {/* Services */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <div className="section-label mb-4 mx-auto w-fit">AI Automation</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Intelligent Solutions for Clients</h2>
+            <div className="section-label mb-4 mx-auto w-fit">Cybersecurity Services</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What We Offer</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              AI solutions designed to automate and optimize every aspect of your business operations
+              Red teaming, penetration testing, and vulnerability analysis — delivered as a severity-priced Pentesting Report
             </p>
           </div>
 
@@ -367,7 +349,7 @@ export default function HomePage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Why Clients Choose 7Trendz Data</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              One partner for AI automation and red team vulnerability discovery
+              Red teaming, pentesting, and vulnerability discovery — with defender matching for every finding
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -390,15 +372,15 @@ export default function HomePage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">How We Help Clients</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Our process: automate your business, red team your environment, and connect you with defenders for every issue
+              Our process: red team your environment, document every finding, and connect you with defenders for each issue
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: "01", title: "Recon & Assess", description: "Red team recon and AI agents map your attack surface and automation opportunities." },
+              { step: "01", title: "Recon & Assess", description: "Red team recon and AI agents map your attack surface and every exposure." },
               { step: "02", title: "Find Vulnerabilities", description: "Pentesting and AI analysis expose gaps with prioritized, documented findings." },
               { step: "03", title: "Match Defenders", description: "Each issue is routed to the right defender based on type, severity, and expertise needed." },
-              { step: "04", title: "Automate & Optimize", description: "Deploy AI automation while tracking remediation progress on every finding." },
+              { step: "04", title: "Report & Verify", description: "You receive a severity-priced Pentesting Report and verification of every fix." },
             ].map((item) => (
               <div key={item.step} className="text-center bg-white rounded-2xl p-6 shadow-md border border-slate-100">
                 <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-4 shadow-md">
@@ -417,12 +399,12 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Find Your Vulnerabilities?</h2>
           <p className="text-xl text-cyan-100 mb-8">
-            Join clients who trust 7Trendz Data for AI automation, red teaming, and defender matching.
+            Book a red team assessment today — your Pentesting Report is priced from R2,500 (low) to R15,000 (critical).
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100 shadow-lg h-12 px-8">
-              <Link href="/contact">
-                Get Your Custom Quote <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/contact#pricing">
+                View Pentesting Report Pricing <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 h-12 px-8">

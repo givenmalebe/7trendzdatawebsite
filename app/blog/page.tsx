@@ -29,8 +29,6 @@ interface BlogPost {
 
 const CATEGORY_META: Record<string, { icon: string; gradient: string; text: string; bg: string }> = {
   Cybersecurity: { icon: "🛡️", gradient: "from-red-500 to-rose-600", text: "text-red-600", bg: "bg-red-50 border-red-100" },
-  "AI Automation": { icon: "🤖", gradient: "from-blue-500 to-indigo-600", text: "text-blue-600", bg: "bg-blue-50 border-blue-100" },
-  "Agentic AI": { icon: "🧠", gradient: "from-purple-500 to-violet-600", text: "text-purple-600", bg: "bg-purple-50 border-purple-100" },
   "Red Teaming": { icon: "🎯", gradient: "from-orange-500 to-red-600", text: "text-orange-600", bg: "bg-orange-50 border-orange-100" },
   "Vulnerability Analysis": { icon: "🔍", gradient: "from-amber-500 to-yellow-600", text: "text-amber-600", bg: "bg-amber-50 border-amber-100" },
   "Defender Matching": { icon: "🤝", gradient: "from-cyan-500 to-teal-600", text: "text-cyan-600", bg: "bg-cyan-50 border-cyan-100" },
@@ -38,7 +36,7 @@ const CATEGORY_META: Record<string, { icon: string; gradient: string; text: stri
   Business: { icon: "📊", gradient: "from-emerald-500 to-green-600", text: "text-emerald-600", bg: "bg-emerald-50 border-emerald-100" },
 }
 
-const CATEGORIES = ["All", "Cybersecurity", "AI Automation", "Agentic AI", "Red Teaming", "Vulnerability Analysis", "Defender Matching", "Technology", "Business"]
+const CATEGORIES = ["All", "Cybersecurity", "Red Teaming", "Vulnerability Analysis", "Defender Matching", "Technology", "Business"]
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([])
@@ -95,7 +93,7 @@ export default function BlogPage() {
             The <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">7Trendz</span> Blog
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-            Expert insights on AI automation, cybersecurity red teaming, and vulnerability analysis for South African businesses
+            Expert insights on cybersecurity red teaming, vulnerability analysis, and defender matching for South African businesses
           </p>
         </div>
       </section>
