@@ -80,7 +80,7 @@ export default function ContactPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Get in Touch</h1>
           <p className="text-xl text-slate-300 leading-relaxed">
             Have questions about cybersecurity, red teaming, or vulnerability analysis? We find the gaps and connect
-            you with the right defender — every engagement is delivered as a severity-priced Pentesting Report.
+            you with the right defender — every engagement is delivered as a Pentesting Report, quoted after findings.
           </p>
         </div>
       </section>
@@ -255,7 +255,7 @@ export default function ContactPage() {
                   {[
                     { icon: Shield, text: "Red teaming & vulnerability discovery" },
                     { icon: UserCheck, text: "Defender matching for every issue we find" },
-                    { icon: Crosshair, text: "Pentesting Reports priced by severity" },
+                    { icon: Crosshair, text: "Pentesting Reports quoted after findings" },
                     { icon: CheckCircle, text: "24/7 AI recon and security monitoring" },
                   ].map((item) => (
                     <div key={item.text} className="flex items-start gap-2">
@@ -277,8 +277,8 @@ export default function ContactPage() {
             <div className="section-label mb-4 mx-auto w-fit">Pricing</div>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Pentesting Report Pricing</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report, priced by the
-              highest severity of vulnerability found.
+              We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report — pricing is
+              quoted after exploitation and findings.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -293,17 +293,15 @@ export default function ContactPage() {
                   <CardDescription className="text-slate-600">{tier.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-4xl font-bold text-slate-900">
-                    R{tier.defaultPrice.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-slate-500">One-time Pentesting Report fee</p>
+                  <p className="text-xl font-bold text-slate-900">Quoted after findings</p>
+                  <p className="text-sm text-slate-500">Price depends on the vulnerabilities we uncover</p>
                 </CardContent>
               </Card>
             ))}
           </div>
           <p className="text-center text-sm text-slate-500 mt-8">
-            Price reflects the highest severity vulnerability documented in your Pentesting Report. Contact us to book
-            your assessment — we'll respond within 24 hours.
+            Pricing is quoted after exploitation and findings, based on the vulnerabilities we document. Contact us to
+            book your assessment — we'll respond within 24 hours.
           </p>
         </div>
       </section>
@@ -331,9 +329,9 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report, priced by
-                  the highest severity of vulnerability we find: Low R2,500, Medium R5,000, High R10,000, and Critical
-                  R15,000. No hidden fees — you know exactly what your report will cost before we start.
+                  We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report. Pricing
+                  is quoted after exploitation and findings, based on the severity and scope of the vulnerabilities we
+                  uncover — you'll agree the amount with us before the final report is delivered. No hidden fees.
                 </p>
               </CardContent>
             </Card>

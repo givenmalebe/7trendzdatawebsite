@@ -468,12 +468,9 @@ function AdminContent() {
               </div>
               <div>
                 <Label>Service / Product</Label>
-                <Select value={newRevenue.serviceId} onValueChange={(v) => {
-                  const s = SERVICES_PRODUCTS.find((x) => x.id === v)
-                  setNewRevenue({ ...newRevenue, serviceId: v, amount: s ? String(s.defaultPrice) : "" })
-                }}>
+                <Select value={newRevenue.serviceId} onValueChange={(v) => setNewRevenue({ ...newRevenue, serviceId: v })}>
                   <SelectTrigger><SelectValue placeholder="Select service" /></SelectTrigger>
-                  <SelectContent>{SERVICES_PRODUCTS.map((s) => <SelectItem key={s.id} value={s.id}>{s.name} (R{s.defaultPrice})</SelectItem>)}</SelectContent>
+                  <SelectContent>{SERVICES_PRODUCTS.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
               <div><Label>Amount (ZAR)</Label><Input type="number" value={newRevenue.amount} onChange={(e) => setNewRevenue({ ...newRevenue, amount: e.target.value })} /></div>

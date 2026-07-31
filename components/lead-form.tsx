@@ -24,10 +24,10 @@ interface LeadFormProps {
 
 const INTERESTS = [
   "Red Team Assessment",
-  "Pentesting Report — Low (R2,500)",
-  "Pentesting Report — Medium (R5,000)",
-  "Pentesting Report — High (R10,000)",
-  "Pentesting Report — Critical (R15,000)",
+  "Pentesting Report — Low Severity",
+  "Pentesting Report — Medium Severity",
+  "Pentesting Report — High Severity",
+  "Pentesting Report — Critical Severity",
   "Vulnerability Analysis",
   "Defender Matching",
   "Other",

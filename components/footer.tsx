@@ -15,8 +15,8 @@ export function Footer() {
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               We expose security gaps through red teaming, pentesting, and vulnerability analysis — then connect you
-              with the right defender for each issue we find. Every engagement is delivered as a severity-priced
-              Pentesting Report.
+              with the right defender for each issue we find. Every engagement is delivered as a Pentesting Report,
+              with pricing quoted after exploitation and findings.
             </p>
           </div>
 

@@ -50,8 +50,8 @@ export default function AboutPage() {
           </h1>
           <p className="text-xl text-slate-300 leading-relaxed">
             We expose security gaps through red teaming, pentesting, and vulnerability analysis — then connect each
-            issue to the defender best suited to fix it. Every engagement is delivered as a severity-priced Pentesting
-            Report.
+            issue to the defender best suited to fix it. Every engagement is delivered as a Pentesting Report, with
+            pricing quoted after exploitation and findings.
           </p>
         </div>
       </section>
@@ -80,7 +80,7 @@ export default function AboutPage() {
             <CardContent>
               <p className="text-slate-600 text-lg leading-relaxed">
                 To make red teaming and vulnerability discovery accessible to every business — finding security gaps,
-                documenting them in a severity-priced Pentesting Report, and connecting clients with the right defender
+                documenting them in a Pentesting Report, and connecting clients with the right defender
                 for each issue we uncover.
               </p>
             </CardContent>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             <CardContent>
               <p className="text-slate-600 text-lg leading-relaxed">
                 To be the go-to red team partner — where every vulnerability is found, documented, and routed to
-                the right defender through a severity-priced Pentesting Report.
+                the right defender through a Pentesting Report.
               </p>
             </CardContent>
           </Card>
@@ -107,7 +107,7 @@ export default function AboutPage() {
           <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
             <p>Founded in 2024, 7Trendz Data emerged from a clear insight: clients need someone to find their vulnerabilities through red teaming — not another defender selling generic fixes.</p>
             <p>We built a company that red teams your environment, analyzes every gap with AI, and connects you with the right specialist defender based on each specific issue.</p>
-            <p>Today we serve clients with pentesting, red teaming, vulnerability analysis, and expert defender matching — every engagement delivered as a Pentesting Report priced by severity.</p>
+            <p>Today we serve clients with pentesting, red teaming, vulnerability analysis, and expert defender matching — every engagement delivered as a Pentesting Report, with pricing quoted after findings.</p>
           </div>
         </div>
       </section>

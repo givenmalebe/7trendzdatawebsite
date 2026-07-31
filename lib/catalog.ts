@@ -6,7 +6,6 @@ export const PENTEST_REPORT_TIERS = [
     severity: "Low",
     label: "Low Vulnerability",
     description: "Pentesting report covering low-severity findings",
-    defaultPrice: 2500,
     badge: "bg-emerald-50 text-emerald-700 border-emerald-200",
     dot: "bg-emerald-500",
   },
@@ -15,7 +14,6 @@ export const PENTEST_REPORT_TIERS = [
     severity: "Medium",
     label: "Medium Vulnerability",
     description: "Pentesting report covering medium-severity findings",
-    defaultPrice: 5000,
     badge: "bg-amber-50 text-amber-700 border-amber-200",
     dot: "bg-amber-500",
   },
@@ -24,7 +22,6 @@ export const PENTEST_REPORT_TIERS = [
     severity: "High",
     label: "High Vulnerability",
     description: "Pentesting report covering high-severity findings",
-    defaultPrice: 10000,
     badge: "bg-orange-50 text-orange-700 border-orange-200",
     dot: "bg-orange-500",
   },
@@ -33,7 +30,6 @@ export const PENTEST_REPORT_TIERS = [
     severity: "Critical",
     label: "Critical Vulnerability",
     description: "Pentesting report covering critical-severity findings",
-    defaultPrice: 15000,
     badge: "bg-red-50 text-red-700 border-red-200",
     dot: "bg-red-500",
   },
@@ -43,7 +39,6 @@ export const SERVICES_PRODUCTS = PENTEST_REPORT_TIERS.map((tier) => ({
   id: tier.id,
   name: `Pentesting Report — ${tier.label}`,
   category: "Red Team",
-  defaultPrice: tier.defaultPrice,
 }))
 
 export const REPORT_STAGES = [

@@ -120,7 +120,7 @@ export default function HomePage() {
     { icon: Clock, title: "24/7 Coverage", description: "AI recon agents and red team analysts watch your attack surface around the clock." },
     { icon: TrendingUp, title: "Machine-Speed Recon", description: "Autonomous agents map assets and detect exposures far faster than manual assessment." },
     { icon: Users, title: "Expert Defender Matching", description: "Every vulnerability gets routed to the right specialist — not a one-size-fits-all fix." },
-    { icon: Star, title: "Severity-Based Pricing", description: "Pay by the highest severity we find — R2,500 to R15,000 — with no hidden fees." },
+    { icon: Star, title: "Pricing Quoted After Findings", description: "We quote your price after exploitation and findings — based on the vulnerabilities we uncover, not a fixed menu." },
   ]
 
   return (
@@ -171,8 +171,8 @@ export default function HomePage() {
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Cybersecurity — Delivered as a Pentesting Report</h2>
             <p className="text-xl text-emerald-50 max-w-2xl mx-auto">
-              Every engagement is priced by the highest severity of vulnerability we find — and matched to the right
-              defender for each issue
+              Every engagement is delivered as a Pentesting Report — pricing is quoted after exploitation and findings,
+              and every issue is matched to the right defender.
             </p>
           </div>
 
@@ -199,8 +199,8 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-2xl bg-white rounded-2xl overflow-hidden">
               <CardHeader className="text-center pb-2 pt-8">
-                <CardTitle className="text-3xl font-bold text-slate-900">Pentesting Report Pricing</CardTitle>
-                <CardDescription className="text-base">Priced by the highest severity vulnerability found</CardDescription>
+                <CardTitle className="text-3xl font-bold text-slate-900">Your Pentesting Report</CardTitle>
+                <CardDescription className="text-base">Pricing is quoted after exploitation and findings</CardDescription>
               </CardHeader>
               <CardHeader className="pt-0">
                 <div className="space-y-3">
@@ -208,9 +208,12 @@ export default function HomePage() {
                     <div key={tier.id} className="flex items-center gap-3">
                       <span className={`h-3 w-3 rounded-full ${tier.dot} shrink-0`} />
                       <span className="text-slate-700 flex-1">{tier.label}</span>
-                      <span className="text-slate-900 font-bold">R{tier.defaultPrice.toLocaleString()}</span>
                     </div>
                   ))}
+                  <p className="text-sm text-slate-500 pt-3 border-t border-slate-100">
+                    Pricing depends on the vulnerabilities we uncover — we quote you after the assessment, based on the
+                    highest severity of vulnerability documented.
+                  </p>
                 </div>
                 <div className="space-y-3 mt-8">
                   <Button asChild size="lg" className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white">
@@ -239,7 +242,8 @@ export default function HomePage() {
             <div className="section-label mb-4 mx-auto w-fit">Cybersecurity Services</div>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What We Offer</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Red teaming, penetration testing, and vulnerability analysis — delivered as a severity-priced Pentesting Report
+              Red teaming, penetration testing, and vulnerability analysis — delivered as a Pentesting Report with
+              pricing quoted after findings.
             </p>
           </div>
 
@@ -380,7 +384,7 @@ export default function HomePage() {
               { step: "01", title: "Recon & Assess", description: "Red team recon and AI agents map your attack surface and every exposure." },
               { step: "02", title: "Find Vulnerabilities", description: "Pentesting and AI analysis expose gaps with prioritized, documented findings." },
               { step: "03", title: "Match Defenders", description: "Each issue is routed to the right defender based on type, severity, and expertise needed." },
-              { step: "04", title: "Report & Verify", description: "You receive a severity-priced Pentesting Report and verification of every fix." },
+              { step: "04", title: "Report & Verify", description: "You receive a Pentesting Report documenting every finding, plus verification of every fix." },
             ].map((item) => (
               <div key={item.step} className="text-center bg-white rounded-2xl p-6 shadow-md border border-slate-100">
                 <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-4 shadow-md">
@@ -399,7 +403,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Find Your Vulnerabilities?</h2>
           <p className="text-xl text-cyan-100 mb-8">
-            Book a red team assessment today — your Pentesting Report is priced from R2,500 (low) to R15,000 (critical).
+            Book a red team assessment today — your Pentesting Report is quoted after exploitation and findings.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100 shadow-lg h-12 px-8">

@@ -45,7 +45,7 @@ export function AIChatbot() {
     {
       id: "1",
       content:
-        "👋 Hello! I'm your cybersecurity assistant from 7Trendz Data. We only offer cybersecurity services — every engagement is delivered as a **Pentesting Report** priced by the highest severity of vulnerability we find:\n\n🟢 **Low Severity** - R2,500\n🟡 **Medium Severity** - R5,000\n🟠 **High Severity** - R10,000\n🔴 **Critical Severity** - R15,000\n\nWe're red teamers, not defenders — we expose the gaps and connect you with the right defender for each issue. What would you like to know?",
+        "👋 Hello! I'm your cybersecurity assistant from 7Trendz Data. We only offer cybersecurity services — every engagement is delivered as a **Pentesting Report**, with pricing quoted after exploitation and findings.\n\nSeverity levels we document: 🟢 **Low**, 🟡 **Medium**, 🟠 **High**, 🔴 **Critical**.\n\nWe're red teamers, not defenders — we expose the gaps, price each engagement based on what we find, and connect you with the right defender for every issue. What would you like to know?",
       role: "assistant",
       timestamp: new Date().toISOString(),
       suggestions: [
@@ -225,7 +225,7 @@ export function AIChatbot() {
     if (lowerMessage.includes("pricing") || lowerMessage.includes("price") || lowerMessage.includes("cost")) {
       return [
         "What determines my report price?",
-        "How much for a critical finding?",
+        "How is pricing determined?",
         "Are there any hidden fees?",
         "Book a pentesting report",
       ]
