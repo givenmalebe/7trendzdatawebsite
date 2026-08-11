@@ -13,6 +13,8 @@ import { Save, X, Upload, Bold, Italic, List, LinkIcon, ImageIcon, Eye, Code, Ty
 import Image from "next/image"
 import { formatBlogContent } from "@/lib/format-content"
 import { sanitizeHTML } from "@/lib/sanitize"
+import { storage } from "@/lib/firebase"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 interface BlogPost {
   id?: string
@@ -88,13 +90,11 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
   const handleImageUpload = async (file: File) => {
     try {
       setIsUploading(true)
-      const formData = new FormData()
-      formData.append("file", file)
-      const response = await fetch("/api/upload-image", { method: "POST", body: formData })
-      if (response.ok) {
-        const data = await response.json()
-        setImageUrl(data.url)
-      }
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_")
+      const objectRef = ref(storage, `blog-images/${Date.now()}-${safeName}`)
+      await uploadBytes(objectRef, file)
+      const url = await getDownloadURL(objectRef)
+      setImageUrl(url)
     } catch (error) {
       console.error("Error uploading image:", error)
     } finally {

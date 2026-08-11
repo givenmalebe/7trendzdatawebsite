@@ -30,8 +30,8 @@ import {
   type ResearchResult,
   type GeneratedBlog,
 } from "@/lib/blog-agent"
-
-import { authFetch } from "@/lib/auth-fetch"
+import { getAdminSettings, saveAdminSettings, deleteAdminApiKey, maskApiKey } from "@/lib/admin-settings-service"
+import { useAuth } from "@/components/auth-provider"
 import { sanitizeHTML } from "@/lib/sanitize"
 
 interface AIBlogGeneratorProps {
@@ -49,6 +49,7 @@ interface AIBlogGeneratorProps {
 type AgentStep = "topic" | "research" | "generating" | "review"
 
 export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
+  const { profile, loading: authLoading } = useAuth()
   const [step, setStep] = useState<AgentStep>("topic")
   const [topic, setTopic] = useState("")
   const [category, setCategory] = useState("")
@@ -59,33 +60,54 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
   const [error, setError] = useState("")
   const [showTopics, setShowTopics] = useState(false)
   const [apiKey, setApiKey] = useState("")
+  const [savedKeyPreview, setSavedKeyPreview] = useState("")
   const [apiKeyConfigured, setApiKeyConfigured] = useState<boolean | null>(null)
   const [savingKey, setSavingKey] = useState(false)
   const [showKeyConfig, setShowKeyConfig] = useState(false)
 
   useEffect(() => {
-    authFetch("/api/admin-settings")
-      .then((r) => r.json())
-      .then((data) => {
-        const key = data.openrouter_api_key || ""
+    if (authLoading || profile?.role !== "admin") return
+
+    getAdminSettings()
+      .then((settings) => {
+        const key = settings.openrouter_api_key || ""
         setApiKey(key)
+        setSavedKeyPreview(key ? maskApiKey(key) : "")
         setApiKeyConfigured(!!key)
       })
-      .catch(() => setApiKeyConfigured(false))
-  }, [])
+      .catch(() => {
+        setApiKeyConfigured(false)
+      })
+  }, [authLoading, profile?.role])
 
   const handleSaveApiKey = async () => {
-    if (!apiKey.trim()) return
+    const trimmed = apiKey.trim()
+    if (!trimmed) return
     setSavingKey(true)
+    setError("")
     try {
-      await authFetch("/api/admin-settings", {
-        method: "POST",
-        body: JSON.stringify({ openrouter_api_key: apiKey.trim() }),
-      })
+      await saveAdminSettings({ openrouter_api_key: trimmed, model: "free" })
+      setSavedKeyPreview(maskApiKey(trimmed))
       setApiKeyConfigured(true)
       setShowKeyConfig(false)
     } catch {
-      setError("Failed to save API key.")
+      setError("Failed to save API key. Make sure you are logged in as admin.")
+    } finally {
+      setSavingKey(false)
+    }
+  }
+
+  const handleDeleteApiKey = async () => {
+    setSavingKey(true)
+    setError("")
+    try {
+      await deleteAdminApiKey()
+      setApiKey("")
+      setSavedKeyPreview("")
+      setApiKeyConfigured(false)
+      setShowKeyConfig(true)
+    } catch {
+      setError("Failed to remove API key.")
     } finally {
       setSavingKey(false)
     }
@@ -191,7 +213,9 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
           <CardContent className="pt-4 pb-4 space-y-3">
             <div>
               <Label className="font-semibold text-sm">OpenRouter API Key</Label>
-              <p className="text-xs text-muted-foreground mt-1">Uses free model — no charges</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Saved permanently in your account until you delete it
+              </p>
             </div>
             <div className="flex gap-2">
               <Input
@@ -205,23 +229,32 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
                 Save
               </Button>
             </div>
+            {apiKeyConfigured && (
+              <Button variant="destructive" size="sm" onClick={handleDeleteApiKey} disabled={savingKey}>
+                Delete saved key
+              </Button>
+            )}
             <p className="text-xs text-muted-foreground">
               Get your key at{" "}
               <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-600 underline">
                 openrouter.ai/keys
-              </a>{" "}
-              — key is tested and verified before saving
+              </a>
             </p>
           </CardContent>
         </Card>
       )}
 
-      {apiKeyConfigured === true && (
-        <div className="flex items-center gap-2 text-sm text-emerald-600">
+      {apiKeyConfigured === true && !showKeyConfig && (
+        <div className="flex flex-wrap items-center gap-2 text-sm text-emerald-600">
           <Check className="h-4 w-4" />
-          <span>API key configured — using free model</span>
-          <Button variant="ghost" size="sm" className="text-xs h-6" onClick={() => setShowKeyConfig(!showKeyConfig)}>
+          <span>
+            API key saved{savedKeyPreview ? `: ${savedKeyPreview}` : ""} — persists until you delete it
+          </span>
+          <Button variant="ghost" size="sm" className="text-xs h-6" onClick={() => setShowKeyConfig(true)}>
             Change
+          </Button>
+          <Button variant="ghost" size="sm" className="text-xs h-6 text-red-600 hover:text-red-700" onClick={handleDeleteApiKey}>
+            Delete
           </Button>
         </div>
       )}

@@ -11,7 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { registerAdminUser } from "@/lib/auth-service"
-import { authFetch } from "@/lib/auth-fetch"
+import { ADMIN_EMAILS } from "@/lib/catalog"
 
 function authErrorMessage(err: unknown): string {
   const code = err && typeof err === "object" && "code" in err ? String((err as { code: string }).code) : ""
@@ -58,18 +58,14 @@ export default function CreateAdminPage() {
 
     setIsSubmitting(true)
     try {
-      const checkRes = await authFetch("/api/create-admin", {
-        method: "POST",
-        body: JSON.stringify({ email: formData.email.trim().toLowerCase() }),
-      })
-      const checkData = await checkRes.json()
-      if (!checkRes.ok) {
-        setError(checkData.error || "Email not authorized.")
+      const normalizedEmail = formData.email.trim().toLowerCase()
+      if (!ADMIN_EMAILS.includes(normalizedEmail)) {
+        setError("This email is not authorized to create admin accounts.")
         return
       }
 
-      await registerAdminUser(formData.email, formData.password, formData.name || "Admin")
-      setCreatedEmail(formData.email.trim().toLowerCase())
+      await registerAdminUser(normalizedEmail, formData.password, formData.name || "Admin")
+      setCreatedEmail(normalizedEmail)
       setSuccess(true)
       setTimeout(() => router.push("/admin"), 2500)
     } catch (err) {
