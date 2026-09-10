@@ -82,7 +82,7 @@ export function DashboardSidebar({ userEmail, ...props }: DashboardSidebarProps)
 
   const mainNavItems = [
     { title: "Home", href: "/", icon: Home },
-    { title: "Services", href: "/services", icon: Briefcase },
+    { title: "Products", href: "/", icon: Briefcase },
     { title: "About", href: "/about", icon: Info },
     { title: "Blog Reader", href: "/blog-reader", icon: BookOpen },
     { title: "Contact", href: "/contact", icon: Mail },

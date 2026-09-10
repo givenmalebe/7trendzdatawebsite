@@ -204,7 +204,7 @@ export default function BlogReader() {
                   Book Consultation
                 </Button>
               </Link>
-              <Link href="/services">
+              <Link href="/products/security/">
                 <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-xl">
                   View Services
                 </Button>
