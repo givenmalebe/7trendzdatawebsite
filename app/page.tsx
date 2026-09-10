@@ -7,6 +7,7 @@ import { ArrowRight, Sparkles, Cpu, MapPin, Rocket } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CorporateBackground } from "@/components/corporate-background"
+import { HeroVideoBackground } from "@/components/hero-video-background"
 import { LeadForm } from "@/components/lead-form"
 import { ProductCard } from "@/components/product-card"
 import { PRODUCTS } from "@/lib/products"
@@ -40,7 +41,10 @@ export default function HomePage() {
       <Header />
 
       <section className="corporate-hero relative min-h-[88vh] flex items-center py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <CorporateBackground />
+        <HeroVideoBackground />
+        <div className="relative z-[1] pointer-events-none absolute inset-0">
+          <CorporateBackground />
+        </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
           <div className="section-label-corporate-dark mb-6 mx-auto w-fit">
             <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
