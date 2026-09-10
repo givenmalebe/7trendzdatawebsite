@@ -71,6 +71,12 @@ const config: Config = {
           red: "hsl(var(--cyber-red))",
           purple: "hsl(var(--cyber-purple))",
         },
+        trendz: {
+          navy: "hsl(var(--trendz-navy))",
+          blue: "hsl(var(--trendz-blue))",
+          accent: "hsl(var(--trendz-accent))",
+          gold: "hsl(var(--trendz-gold))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -113,8 +119,8 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "cyber-mesh":
-          "radial-gradient(at 40% 20%, hsl(187 92% 53% / 0.12) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(0 72% 51% / 0.08) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(263 70% 58% / 0.08) 0px, transparent 50%)",
+        "corporate-mesh":
+          "radial-gradient(at 30% 10%, hsl(222 60% 45% / 0.14) 0px, transparent 55%), radial-gradient(at 80% 0%, hsl(185 95% 40% / 0.09) 0px, transparent 50%), radial-gradient(at 0% 80%, hsl(45 90% 55% / 0.06) 0px, transparent 50%)",
       },
     },
   },
