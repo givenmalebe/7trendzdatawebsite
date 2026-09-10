@@ -9,22 +9,24 @@ const SITE_NAME = "7Trendz Data"
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
+    default: "7Trendz Data — Building the Future with AI in South Africa",
     template: "%s | 7Trendz Data",
   },
   description:
-    "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity — then connect you with the right defender.",
+    "7Trendz Data is a South African AI company building intelligent products across security, learning, HR, Web3, and development. From AI red teaming and FutureLearning LMS to AI HR assistant Ask Sarah, we develop apps using AI.",
   keywords: [
-    "red teaming South Africa",
-    "cybersecurity South Africa",
-    "penetration testing",
-    "pentesting report",
-    "vulnerability assessment",
-    "defender matching",
-    "security consulting Johannesburg",
-    "ethical hacking South Africa",
-    "red team assessment",
-    "cyber security services",
+    "AI company South Africa",
+    "AI red teaming",
+    "AI cyber security",
+    "AI learning management system",
+    "FutureLearning",
+    "Ask Sarah AI HR",
+    "AI web3 development",
+    "smart contract auditing",
+    "AI app development",
+    "custom AI applications",
+    "AI software development Johannesburg",
+    "7trendzlearn.co.za",
   ],
   authors: [{ name: "7Trendz Data", url: SITE_URL }],
   creator: "7Trendz Data",
@@ -39,23 +41,23 @@ export const metadata: Metadata = {
     locale: "en_ZA",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
+    title: "7Trendz Data — Building the Future with AI in South Africa",
     description:
-      "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity.",
+      "AI products across security, learning, HR, Web3, and development. FutureLearning LMS, Ask Sarah AI HR, AI red teaming, and more.",
     images: [
       {
         url: "/images/7trendz-logo-final.png",
         width: 1200,
         height: 630,
-        alt: "7Trendz Data — Cybersecurity & Red Teaming",
+        alt: "7Trendz Data — Building the Future with AI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "7Trendz Data — Cybersecurity & Red Teaming in South Africa",
+    title: "7Trendz Data — Building the Future with AI in South Africa",
     description:
-      "South Africa's leading cybersecurity red teaming company. We identify security vulnerabilities through penetration testing and deliver pentesting reports priced by severity.",
+      "AI products across security, learning, HR, Web3, and development. FutureLearning LMS, Ask Sarah AI HR, AI red teaming, and more.",
     images: ["/images/7trendz-logo-final.png"],
     creator: "@7trendzdata",
   },
@@ -92,8 +94,8 @@ export default function RootLayout({
     name: SITE_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/images/7trendz-logo-final.png`,
-    description:
-      "South Africa's leading cybersecurity red teaming company.",
+    description: "South African AI company building products across security, learning, HR, Web3, and development.",
+    slogan: "Building the future with AI",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Johannesburg",
@@ -111,38 +113,11 @@ export default function RootLayout({
       availableLanguage: ["English"],
     },
     makesOffer: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Pentesting Report — Low Vulnerability",
-          description: "Pentesting report covering low-severity findings.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Pentesting Report — Medium Vulnerability",
-          description: "Pentesting report covering medium-severity findings.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Pentesting Report — High Vulnerability",
-          description: "Pentesting report covering high-severity findings.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Pentesting Report — Critical Vulnerability",
-          description: "Pentesting report covering critical-severity findings.",
-        },
-      },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "FutureLearning", description: "AI-powered learning management system at 7trendzlearn.co.za" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ask Sarah", description: "AI HR assistant for onboarding, policy Q&A, and leave management" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Security", description: "AI-powered red teaming, pentesting, and vulnerability analysis" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Web3 Development", description: "Smart contracts, dApps, token engineering and DAO tools built with AI" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Development", description: "Custom AI-powered applications and integration consulting" } },
     ],
   }
 
