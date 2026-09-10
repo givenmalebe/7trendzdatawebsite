@@ -6,40 +6,36 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { createLead } from "@/lib/lead-service"
-import { CheckCircle, Crosshair } from "lucide-react"
+import { CheckCircle, Sparkles } from "lucide-react"
+import { PRODUCTS } from "@/lib/products"
 
 interface LeadFormProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  defaultProduct?: string
 }
 
 const INTERESTS = [
-  "Red Team Assessment",
-  "Pentesting Report — Low Severity",
-  "Pentesting Report — Medium Severity",
-  "Pentesting Report — High Severity",
-  "Pentesting Report — Critical Severity",
-  "Vulnerability Analysis",
-  "Defender Matching",
+  "FutureLearning Demo",
+  "Ask Sarah Demo",
+  "AI Security Assessment",
+  "Web3 Development",
+  "AI App Development",
   "Other",
 ]
 
-export function LeadForm({ open, onOpenChange }: LeadFormProps) {
+export function LeadForm({ open, onOpenChange, defaultProduct }: LeadFormProps) {
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
-    interest: "Red Team Assessment",
+    product: defaultProduct || "",
+    interest: "Other",
     message: "",
   })
   const [submitting, setSubmitting] = useState(false)
@@ -55,9 +51,10 @@ export function LeadForm({ open, onOpenChange }: LeadFormProps) {
         email: form.email,
         phone: form.phone || undefined,
         company: form.company || undefined,
+        product: form.product || undefined,
         interest: form.interest,
         message: form.message || undefined,
-        source: "hero_cta",
+        source: defaultProduct ? `product_${defaultProduct}` : "hero_cta",
         status: "new",
       })
       setSubmitted(true)
@@ -70,7 +67,7 @@ export function LeadForm({ open, onOpenChange }: LeadFormProps) {
 
   const handleClose = (next: boolean) => {
     if (!next) {
-      setForm({ name: "", email: "", phone: "", company: "", interest: "Red Team Assessment", message: "" })
+      setForm({ name: "", email: "", phone: "", company: "", product: defaultProduct || "", interest: "Other", message: "" })
       setSubmitted(false)
     }
     onOpenChange(next)
@@ -90,11 +87,11 @@ export function LeadForm({ open, onOpenChange }: LeadFormProps) {
           <form onSubmit={handleSubmit}>
             <DialogHeader>
               <DialogTitle className="text-xl flex items-center gap-2">
-                <Crosshair className="h-5 w-5 text-red-500" />
-                Book a Red Team Assessment
+                <Sparkles className="h-5 w-5 text-blue-600" />
+                Get Started with 7Trendz
               </DialogTitle>
               <DialogDescription>
-                Tell us about your organisation and we&apos;ll schedule a scoping call.
+                Tell us about your organisation and the AI solution you&apos;re interested in.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -117,6 +114,18 @@ export function LeadForm({ open, onOpenChange }: LeadFormProps) {
                 </div>
               </div>
               <div>
+                <Label>Product</Label>
+                <Select value={form.product || "none"} onValueChange={(v) => setForm({ ...form, product: v === "none" ? "" : v })}>
+                  <SelectTrigger><SelectValue placeholder="Select a product" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">General Enquiry</SelectItem>
+                    {PRODUCTS.map((p) => (
+                      <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
                 <Label>Interest</Label>
                 <Select value={form.interest} onValueChange={(v) => setForm({ ...form, interest: v })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
@@ -134,7 +143,7 @@ export function LeadForm({ open, onOpenChange }: LeadFormProps) {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => handleClose(false)}>Cancel</Button>
-              <Button type="submit" disabled={submitting || !form.name || !form.email} className="bg-red-600 hover:bg-red-700">
+              <Button type="submit" disabled={submitting || !form.name || !form.email} className="bg-blue-600 hover:bg-blue-700">
                 {submitting ? "Submitting..." : "Submit Enquiry"}
               </Button>
             </DialogFooter>

@@ -20,6 +20,7 @@ export interface Lead {
   email: string
   phone?: string
   company?: string
+  product?: string
   interest: string
   message?: string
   source: string
