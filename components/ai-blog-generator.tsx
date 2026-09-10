@@ -172,7 +172,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border-0 bg-gradient-to-r from-cyan-600 to-blue-700 text-white">
+      <Card className="border-0 bg-gradient-to-r from-blue-700 to-cyan-700 text-white">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -209,7 +209,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
       )}
 
       {showKeyConfig && (
-        <Card className="border-cyan-200">
+        <Card className="border-blue-200">
           <CardContent className="pt-4 pb-4 space-y-3">
             <div>
               <Label className="font-semibold text-sm">OpenRouter API Key</Label>
@@ -236,7 +236,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
             )}
             <p className="text-xs text-muted-foreground">
               Get your key at{" "}
-              <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-600 underline">
+              <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">
                 openrouter.ai/keys
               </a>
             </p>
@@ -274,10 +274,10 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
             (step === "review" && i <= 2)
           return (
             <div key={s.id} className="flex items-center gap-2">
-              {i > 0 && <div className={`w-6 h-px ${done ? "bg-cyan-500" : "bg-slate-300"}`} />}
+              {i > 0 && <div className={`w-6 h-px ${done ? "bg-blue-600" : "bg-slate-300"}`} />}
               <div
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
-                  active ? "bg-cyan-100 text-cyan-700" : done ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
+                  active ? "bg-blue-100 text-blue-700" : done ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
                 }`}
               >
                 <s.icon className="h-3 w-3" />
@@ -308,7 +308,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
                     onClick={() => { setCategory(cat.value); setShowTopics(false) }}
                     className={`p-3 rounded-lg border-2 text-left transition-all ${
                       category === cat.value
-                        ? "border-cyan-500 bg-cyan-50 shadow-sm"
+                        ? "border-blue-500 bg-blue-50 shadow-sm"
                         : "border-slate-200 hover:border-slate-300"
                     }`}
                   >
@@ -327,7 +327,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowTopics(!showTopics)}
-                    className="text-cyan-600"
+                    className="text-blue-700"
                   >
                     <Zap className="h-3 w-3 mr-1" />
                     {showTopics ? "Hide" : "Suggest Topics"}
@@ -399,7 +399,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
             <Button
               onClick={handleResearch}
               disabled={!topic.trim() || !category || !!loading}
-              className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 h-11"
+              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 h-11"
             >
               {loading ? (
                 <>
@@ -421,7 +421,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Search className="h-5 w-5 text-cyan-600" />
+                <Search className="h-5 w-5 text-blue-700" />
                 Research Complete
               </CardTitle>
               <CardDescription>Key findings for &quot;{topic}&quot;</CardDescription>
@@ -431,7 +431,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
                 <h4 className="font-semibold text-sm mb-2">Key Findings</h4>
                 <ul className="space-y-1.5">
                   {research.keyFindings.map((f, i) => (
-                    <li key={i} className="text-sm text-slate-600 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-cyan-500 before:font-bold">
+                    <li key={i} className="text-sm text-slate-600 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-blue-600 before:font-bold">
                       {f}
                     </li>
                   ))}
@@ -475,7 +475,7 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
           <Button
             onClick={handleGenerate}
             disabled={!!loading}
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 h-11"
+            className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 h-11"
           >
             {loading ? (
               <>
@@ -532,8 +532,8 @@ export function AIBlogGenerator({ onUseGeneratedBlog }: AIBlogGeneratorProps) {
               <div>
                 <Label className="text-xs font-medium text-muted-foreground">Backlinks to 7trendzdata.com</Label>
                 <div className="flex items-center gap-1.5 mt-1">
-                  <Link2 className="h-3.5 w-3.5 text-cyan-500" />
-                  <span className="text-sm text-cyan-600 font-medium">
+                  <Link2 className="h-3.5 w-3.5 text-blue-600" />
+                  <span className="text-sm text-blue-700 font-medium">
                     {(generatedBlog.content.match(/7trendzdata\.com/g) || []).length} internal links found
                   </span>
                 </div>

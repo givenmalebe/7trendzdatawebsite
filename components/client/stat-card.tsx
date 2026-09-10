@@ -8,7 +8,7 @@ export function StatCard({
   value,
   sub,
   icon: Icon,
-  accent = "text-cyan-600",
+  accent = "text-blue-700",
 }: {
   label: string
   value: string | number

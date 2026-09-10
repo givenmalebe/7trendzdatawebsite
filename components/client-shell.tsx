@@ -24,7 +24,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-600" />
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600" />
       </div>
     )
   }
@@ -40,11 +40,11 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50/30 flex">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/60 flex">
       <aside className="w-64 bg-slate-900 text-white flex flex-col shrink-0">
         <div className="p-5 border-b border-slate-800">
           <Link href="/" className="font-bold text-lg">7Trendz Data</Link>
-          <Badge className="mt-2 bg-cyan-600/20 text-cyan-300 border-cyan-500/30">Client Portal</Badge>
+          <Badge className="mt-2 bg-blue-600/20 text-blue-300 border-blue-500/30">Client Portal</Badge>
           <p className="text-xs text-slate-400 mt-2 truncate">{profile.displayName || profile.email}</p>
         </div>
         <nav className="flex-1 p-3 space-y-1">
@@ -54,7 +54,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
               href={`${pathname}?view=${view}`}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                 currentView === view && !searchParams.get("report")
-                  ? "bg-cyan-600 text-white"
+                  ? "bg-blue-600 text-white"
                   : "text-slate-300 hover:bg-slate-800"
               }`}
             >

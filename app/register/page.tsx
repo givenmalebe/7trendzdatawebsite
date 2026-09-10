@@ -56,7 +56,7 @@ export default function RegisterPage() {
         <Card className="w-full max-w-md shadow-xl border-0">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
                 <UserPlus className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -86,13 +86,13 @@ export default function RegisterPage() {
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <Input id="confirmPassword" type="password" value={formData.confirmPassword} onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} required />
               </div>
-              <Button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700" disabled={isLoading}>
                 {isLoading ? "Creating account..." : "Create Account"}
               </Button>
             </form>
             <p className="mt-6 text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="text-cyan-600 hover:underline font-medium">Sign in</Link>
+              <Link href="/login" className="text-blue-700 hover:underline font-medium">Sign in</Link>
             </p>
           </CardContent>
         </Card>

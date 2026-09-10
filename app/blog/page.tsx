@@ -78,11 +78,12 @@ export default function BlogPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-32 pb-20">
+      <section className="corporate-hero relative overflow-hidden pt-32 pb-20">
+        <div className="absolute inset-0 trendz-grid trendz-grid-fade opacity-60" aria-hidden />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
         </div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full text-sm text-white/70 mb-6">
@@ -90,7 +91,7 @@ export default function BlogPage() {
             Latest insights & research
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-            The <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">7Trendz</span> Blog
+            The <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">7Trendz</span> Blog
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
             Expert insights on cybersecurity red teaming, vulnerability analysis, and defender matching for South African businesses
@@ -109,7 +110,7 @@ export default function BlogPage() {
                 placeholder="Search articles, topics, or authors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-12 bg-slate-50 border-slate-200 focus:border-cyan-400 focus:ring-cyan-400/20 rounded-xl text-base"
+                className="pl-12 h-12 bg-slate-50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl text-base"
               />
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -151,7 +152,7 @@ export default function BlogPage() {
       <main className="container mx-auto px-4 py-16">
         {isLoading ? (
           <div className="text-center py-24">
-            <div className="w-12 h-12 border-4 border-slate-200 border-t-cyan-500 rounded-full animate-spin mx-auto" />
+            <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mx-auto" />
             <p className="mt-4 text-slate-400 text-sm">Loading articles...</p>
           </div>
         ) : filteredPosts.length === 0 ? (
@@ -194,7 +195,7 @@ export default function BlogPage() {
 
                     {/* Content */}
                     <div className="p-5 flex flex-col flex-1">
-                      <h2 className="text-lg font-bold text-slate-900 group-hover:text-cyan-700 transition-colors duration-300 line-clamp-2 mb-2 leading-snug">
+                      <h2 className="text-lg font-bold text-slate-900 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2 mb-2 leading-snug">
                         {post.title}
                       </h2>
                       <p className="text-sm text-slate-500 line-clamp-2 mb-4 leading-relaxed flex-1">
@@ -204,7 +205,7 @@ export default function BlogPage() {
                       {/* Meta */}
                       <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
                             <span className="text-[10px] font-bold text-white">{post.author?.charAt(0)?.toUpperCase()}</span>
                           </div>
                           <span className="text-xs text-slate-500 font-medium">{post.author}</span>

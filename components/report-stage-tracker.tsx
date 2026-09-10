@@ -33,7 +33,7 @@ export function ReportStageTracker({ stages, currentStage, compact }: ReportStag
               )}
             </div>
             <div className={cn("pb-4", compact && "pb-2")}>
-              <p className={cn("font-medium text-sm", isCurrent && "text-cyan-700")}>{meta.label}</p>
+              <p className={cn("font-medium text-sm", isCurrent && "text-blue-700")}>{meta.label}</p>
               {!compact && <p className="text-xs text-muted-foreground">{meta.description}</p>}
               {stage?.notes && <p className="text-xs text-slate-600 mt-1">{stage.notes}</p>}
               {stage?.completedAt && (
@@ -54,7 +54,7 @@ function StageIcon({ status, isCurrent }: { status: StageStatus; isCurrent: bool
     return <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
   }
   if (status === "in_progress" || isCurrent) {
-    return <Loader2 className="h-5 w-5 text-cyan-600 animate-spin shrink-0" />
+    return <Loader2 className="h-5 w-5 text-blue-700 animate-spin shrink-0" />
   }
   return <Circle className="h-5 w-5 text-slate-300 shrink-0" />
 }

@@ -80,13 +80,13 @@ export function AIChatbot() {
       icon: Radar,
       label: "AI Recon",
       message: "How do your AI recon agents map my attack surface?",
-      color: "bg-cyan-600",
+      color: "bg-blue-600",
     },
     {
       icon: Bug,
       label: "Vuln Analysis",
       message: "How does AI vulnerability analysis prioritize my findings?",
-      color: "bg-purple-600",
+      color: "bg-violet-600",
     },
     {
       icon: FileText,
@@ -98,7 +98,7 @@ export function AIChatbot() {
       icon: FileText,
       label: "Book Report",
       message: "I'd like to book a red team assessment / pentesting report",
-      color: "bg-gradient-to-r from-cyan-500 to-blue-600",
+      color: "bg-gradient-to-r from-blue-600 to-cyan-600",
     },
   ]
 

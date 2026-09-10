@@ -49,7 +49,7 @@ export default function LoginPage() {
         <Card className="w-full max-w-md shadow-xl border-0">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
                 <LogIn className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -96,14 +96,14 @@ export default function LoginPage() {
                   </Button>
                 </div>
               </div>
-              <Button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
             <div className="mt-6 space-y-3 text-center text-sm text-muted-foreground">
               <p>
                 Don&apos;t have an account?{" "}
-                <Link href="/register" className="text-cyan-600 hover:underline font-medium">
+                <Link href="/register" className="text-blue-700 hover:underline font-medium">
                   Register as client
                 </Link>
               </p>

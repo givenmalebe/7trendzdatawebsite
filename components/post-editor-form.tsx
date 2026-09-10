@@ -41,7 +41,7 @@ const CATEGORY_META: Record<string, { icon: string; gradient: string; color: str
   Cybersecurity: { icon: "🛡️", gradient: "from-red-500 to-rose-600", color: "bg-red-50 text-red-700 border-red-200" },
   "Red Teaming": { icon: "🎯", gradient: "from-orange-500 to-red-600", color: "bg-orange-50 text-orange-700 border-orange-200" },
   "Vulnerability Analysis": { icon: "🔍", gradient: "from-amber-500 to-yellow-600", color: "bg-amber-50 text-amber-700 border-amber-200" },
-  "Defender Matching": { icon: "🤝", gradient: "from-cyan-500 to-teal-600", color: "bg-cyan-50 text-cyan-700 border-cyan-200" },
+  "Defender Matching": { icon: "🤝", gradient: "from-blue-500 to-cyan-600", color: "bg-blue-50 text-blue-700 border-blue-200" },
   Technology: { icon: "💻", gradient: "from-slate-500 to-gray-600", color: "bg-slate-50 text-slate-700 border-slate-200" },
   Business: { icon: "📊", gradient: "from-emerald-500 to-green-600", color: "bg-emerald-50 text-emerald-700 border-emerald-200" },
 }
@@ -116,11 +116,11 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
       case "heading": newText = content.substring(0, start) + `<h2>${selectedText || "Heading"}</h2>` + content.substring(end); break
       case "h3": newText = content.substring(0, start) + `<h3>${selectedText || "Subheading"}</h3>` + content.substring(end); break
       case "list": newText = content.substring(0, start) + `<ul>\n  <li>${selectedText || "List item"}</li>\n</ul>` + content.substring(end); break
-      case "quote": newText = content.substring(0, start) + `<blockquote class="border-l-4 border-cyan-500 pl-4 italic text-gray-600">${selectedText || "Quote"}</blockquote>` + content.substring(end); break
+      case "quote": newText = content.substring(0, start) + `<blockquote class="border-l-4 border-blue-500 pl-4 italic text-gray-600">${selectedText || "Quote"}</blockquote>` + content.substring(end); break
       case "hr": newText = content.substring(0, start) + `\n<hr class="my-8 border-gray-200" />\n` + content.substring(end); break
       case "link": {
         const url = prompt("Enter URL:")
-        if (url) newText = content.substring(0, start) + `<a href="${url}" class="text-cyan-600 hover:underline">${selectedText || "Link text"}</a>` + content.substring(end)
+        if (url) newText = content.substring(0, start) + `<a href="${url}" class="text-blue-700 hover:underline">${selectedText || "Link text"}</a>` + content.substring(end)
         break
       }
       case "image": {
@@ -160,7 +160,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
             </Button>
             <div className="h-6 w-px bg-slate-200" />
             <div className="flex items-center gap-2">
-              <FileText className="h-4 w-4 text-cyan-600" />
+              <FileText className="h-4 w-4 text-blue-700" />
               <span className="text-sm font-medium text-slate-700">
                 {initialPost?.id ? "Editing Post" : "New Post"}
               </span>
@@ -191,7 +191,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
             <Button variant="outline" size="sm" onClick={onCancel} className="hidden sm:flex">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} size="sm" className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/25">
+            <Button onClick={handleSubmit} size="sm" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/25">
               <Save className="h-4 w-4 mr-1.5" />
               {initialPost?.id ? "Update" : "Publish"}
             </Button>
@@ -225,7 +225,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                     onBlur={() => setFocusedField(null)}
                     className="w-full text-3xl md:text-4xl font-bold text-slate-900 placeholder:text-slate-300 bg-transparent border-none outline-none py-2 transition-all duration-300 focus:ring-0"
                   />
-                  <div className={`h-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500 ${focusedField === "title" || title ? "w-full opacity-100" : "w-0 opacity-0"}`} />
+                  <div className={`h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 transition-all duration-500 ${focusedField === "title" || title ? "w-full opacity-100" : "w-0 opacity-0"}`} />
                 </div>
 
                 {/* Excerpt */}
@@ -237,7 +237,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                     onFocus={() => setFocusedField("excerpt")}
                     onBlur={() => setFocusedField(null)}
                     rows={2}
-                    className="text-base text-slate-600 placeholder:text-slate-300 bg-slate-50/80 border-slate-200/60 focus:border-cyan-400 focus:ring-cyan-400/20 resize-none rounded-xl transition-all duration-300"
+                    className="text-base text-slate-600 placeholder:text-slate-300 bg-slate-50/80 border-slate-200/60 focus:border-blue-500 focus:ring-blue-500/20 resize-none rounded-xl transition-all duration-300"
                   />
                 </div>
 
@@ -268,12 +268,12 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                     ) : (
                       <label className="cursor-pointer block">
                         <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImageUpload(f) }} className="hidden" />
-                        <div className="h-48 border-2 border-dashed border-slate-200 hover:border-cyan-400 bg-gradient-to-br from-slate-50 to-slate-100 hover:from-cyan-50/50 hover:to-blue-50/50 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
-                          <div className="w-12 h-12 rounded-xl bg-slate-100 group-hover:bg-cyan-100 flex items-center justify-center transition-colors duration-300">
-                            <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-cyan-600 transition-colors" />
+                        <div className="h-48 border-2 border-dashed border-slate-200 hover:border-blue-500 bg-gradient-to-br from-slate-50 to-slate-100 hover:from-blue-50/50 hover:to-blue-50/50 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+                          <div className="w-12 h-12 rounded-xl bg-slate-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-300">
+                            <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-blue-700 transition-colors" />
                           </div>
                           <div className="text-center">
-                            <p className="text-sm font-medium text-slate-500 group-hover:text-cyan-600 transition-colors">
+                            <p className="text-sm font-medium text-slate-500 group-hover:text-blue-700 transition-colors">
                               {isUploading ? "Uploading..." : "Click to upload featured image"}
                             </p>
                             <p className="text-xs text-slate-400 mt-1">PNG, JPG, GIF up to 10MB</p>
@@ -357,7 +357,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                         {excerpt || "Your excerpt will appear here..."}
                       </p>
                       <div className="flex items-center gap-3 mb-8 pb-6 border-b border-slate-100">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-white font-bold text-sm">
                           {(author || "A").charAt(0).toUpperCase()}
                         </div>
                         <div>
@@ -423,7 +423,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                   placeholder="Author name"
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
-                  className="border-slate-200/60 focus:border-cyan-400 focus:ring-cyan-400/20 h-10"
+                  className="border-slate-200/60 focus:border-blue-500 focus:ring-blue-500/20 h-10"
                 />
               </CardContent>
             </Card>
@@ -438,7 +438,7 @@ export function PostEditorForm({ initialPost, onSave, onCancel }: PostEditorForm
                     value={tagInput}
                     onChange={(e) => setTagInput(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddTag() } }}
-                    className="border-slate-200/60 focus:border-cyan-400 focus:ring-cyan-400/20 h-9 text-sm"
+                    className="border-slate-200/60 focus:border-blue-500 focus:ring-blue-500/20 h-9 text-sm"
                   />
                   <Button type="button" onClick={handleAddTag} variant="outline" size="sm" className="h-9 px-3">
                     Add

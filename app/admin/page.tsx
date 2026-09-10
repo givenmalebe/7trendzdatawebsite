@@ -298,7 +298,7 @@ function AdminContent() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { label: "Active Clients", value: stats.activeClients, icon: Users, color: "text-cyan-600" },
+              { label: "Active Clients", value: stats.activeClients, icon: Users, color: "text-blue-600" },
               { label: "Revenue (Paid)", value: `R${stats.revenueTotal.toLocaleString()}`, icon: DollarSign, color: "text-emerald-600" },
               { label: "Published Posts", value: stats.published, icon: FileText, color: "text-blue-600" },
               { label: "Active Reports", value: stats.activeReports, icon: Crosshair, color: "text-red-600" },
@@ -405,7 +405,7 @@ function AdminContent() {
                                 {post.status}
                               </span>
                             </div>
-                            <h3 className="font-semibold text-slate-800 truncate group-hover:text-cyan-700 transition-colors">{post.title}</h3>
+                            <h3 className="font-semibold text-slate-800 truncate group-hover:text-blue-700 transition-colors">{post.title}</h3>
                             <p className="text-sm text-slate-400 truncate mt-0.5">{post.excerpt}</p>
                             <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
                               <span>{post.author}</span>
@@ -414,7 +414,7 @@ function AdminContent() {
                             </div>
                           </div>
                           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-cyan-600" onClick={() => { setEditingPost(post); setIsEditing(true) }}>
+                            <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-blue-600" onClick={() => { setEditingPost(post); setIsEditing(true) }}>
                               <Edit className="h-3.5 w-3.5" />
                             </Button>
                             <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-red-600" onClick={async () => { await deleteBlogPost(post.id); loadAll() }}>
@@ -630,7 +630,7 @@ function AdminContent() {
                     </div>
                     {uploadingReport && (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-cyan-600" />
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600" />
                         Uploading PDF to client portal...
                       </div>
                     )}

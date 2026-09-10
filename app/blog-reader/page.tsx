@@ -84,7 +84,7 @@ export default function BlogReader() {
       <div className="min-h-screen bg-white">
         <Header />
         <div className="pt-32 pb-20 container mx-auto px-4 text-center">
-          <div className="w-12 h-12 border-4 border-slate-200 border-t-cyan-500 rounded-full animate-spin mx-auto" />
+          <div className="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mx-auto" />
           <p className="mt-4 text-slate-400 text-sm">Loading post...</p>
         </div>
         <Footer />
@@ -114,10 +114,11 @@ export default function BlogReader() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-32 pb-16">
+      <section className="corporate-hero relative overflow-hidden pt-32 pb-16">
+        <div className="absolute inset-0 trendz-grid trendz-grid-fade opacity-50" aria-hidden />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
         </div>
         <div className="relative container mx-auto px-4 max-w-4xl">
           <Link href="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-white/80 text-sm mb-8 transition-colors">
@@ -141,7 +142,7 @@ export default function BlogReader() {
           {/* Author & Meta Bar */}
           <div className="flex flex-wrap items-center gap-6 text-sm text-white/40">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
                 <span className="text-sm font-bold text-white">{post.author?.charAt(0)?.toUpperCase()}</span>
               </div>
               <div>
@@ -195,7 +196,7 @@ export default function BlogReader() {
           </article>
 
           {/* CTA */}
-          <div className="mt-16 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl text-center">
+          <div className="mt-16 p-8 bg-gradient-to-br from-blue-700 to-cyan-700 rounded-2xl text-center">
             <h3 className="text-xl font-bold text-white mb-2">Need a security assessment?</h3>
             <p className="text-white/50 mb-6 text-sm">Get expert red teaming, pentesting, and vulnerability analysis for your business.</p>
             <div className="flex items-center justify-center gap-3">

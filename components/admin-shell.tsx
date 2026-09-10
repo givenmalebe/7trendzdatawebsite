@@ -37,7 +37,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-600" />
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600" />
       </div>
     )
   }
@@ -57,7 +57,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       <aside className="w-64 bg-slate-900 text-white flex flex-col shrink-0">
         <div className="p-5 border-b border-slate-800">
           <Link href="/" className="font-bold text-lg">7Trendz Data</Link>
-          <Badge className="mt-2 bg-cyan-600/20 text-cyan-300 border-cyan-500/30">Admin Portal</Badge>
+          <Badge className="mt-2 bg-blue-600/20 text-blue-300 border-blue-500/30">Admin Portal</Badge>
           <p className="text-xs text-slate-400 mt-2 truncate">{profile.email}</p>
         </div>
         <nav className="flex-1 p-3 space-y-1">
@@ -66,7 +66,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               key={tab}
               href={`${pathname}?tab=${tab}`}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                currentTab === tab ? "bg-cyan-600 text-white" : "text-slate-300 hover:bg-slate-800"
+                currentTab === tab ? "bg-blue-600 text-white" : "text-slate-300 hover:bg-slate-800"
               }`}
             >
               <Icon className="h-4 w-4" />

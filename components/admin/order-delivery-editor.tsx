@@ -67,7 +67,7 @@ export function OrderDeliveryEditor({ order, onSaved }: OrderDeliveryEditorProps
   }
 
   return (
-    <Card className="mt-3 border-cyan-200">
+    <Card className="mt-3 border-blue-200">
       <CardHeader className="pb-3">
         <CardTitle className="text-base">Client delivery update — {order.serviceName}</CardTitle>
       </CardHeader>

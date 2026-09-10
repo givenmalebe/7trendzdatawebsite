@@ -86,7 +86,7 @@ function ClientContent() {
     return (
       <ClientShell>
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-600" />
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600" />
           {linking && <p className="text-sm text-muted-foreground">Setting up your portal...</p>}
         </div>
       </ClientShell>
@@ -209,7 +209,7 @@ function ClientContent() {
         {view === "dashboard" && (
           <>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard label="Active services" value={activeOrders.length} icon={Package} accent="text-cyan-600" />
+              <StatCard label="Active services" value={activeOrders.length} icon={Package} accent="text-blue-600" />
               <StatCard label="Red team reports" value={reports.length} sub={`${activeReports.length} in progress`} icon={Crosshair} accent="text-red-600" />
               <StatCard label="Total orders" value={orders.length} icon={Bot} accent="text-violet-600" />
               <StatCard

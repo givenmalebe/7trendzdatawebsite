@@ -82,7 +82,7 @@ export default function CreateAdminPage() {
         <Card className="w-full max-w-md shadow-xl border-0">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
                 <Shield className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function CreateAdminPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-600"
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Creating admin..." : "Create Admin Account"}
@@ -175,7 +175,7 @@ export default function CreateAdminPage() {
 
             {!success && (
               <p className="mt-6 text-center text-sm text-muted-foreground">
-                <Link href="/login" className="text-cyan-600 hover:underline font-medium">
+                <Link href="/login" className="text-blue-700 hover:underline font-medium">
                   Back to login
                 </Link>
               </p>

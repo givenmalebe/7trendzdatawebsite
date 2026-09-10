@@ -61,8 +61,8 @@ export function ServiceOrderCard({ order, expanded = true }: ServiceOrderCardPro
         </div>
 
         {order.clientUpdate && (
-          <div className="rounded-lg border border-cyan-200 bg-cyan-50/50 p-4">
-            <p className="text-xs font-semibold text-cyan-800 uppercase tracking-wide mb-1">Latest update from 7Trendz</p>
+          <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-4">
+            <p className="text-xs font-semibold text-blue-800 uppercase tracking-wide mb-1">Latest update from 7Trendz</p>
             <p className="text-sm text-slate-700">{order.clientUpdate}</p>
             <p className="text-xs text-muted-foreground mt-2">Updated {formatDateTime(order.updated_at)}</p>
           </div>
@@ -110,7 +110,7 @@ function MilestoneRow({
     <div className="flex gap-3 items-start p-3 rounded-lg border bg-white">
       <Icon className={cn(
         "h-5 w-5 shrink-0 mt-0.5",
-        status === "completed" ? "text-emerald-600" : status === "in_progress" ? "text-cyan-600 animate-spin" : "text-slate-300",
+        status === "completed" ? "text-emerald-600" : status === "in_progress" ? "text-blue-700 animate-spin" : "text-slate-300",
       )} />
       <div className="min-w-0">
         <p className="font-medium text-sm">{label}</p>

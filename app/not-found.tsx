@@ -20,7 +20,7 @@ export default function NotFound() {
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link href="/">
-            <Button className="bg-slate-900 hover:bg-slate-800 rounded-xl">Go Home</Button>
+            <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 rounded-xl">Go Home</Button>
           </Link>
           <Link href="/blog">
             <Button variant="outline" className="rounded-xl">Read Our Blog</Button>

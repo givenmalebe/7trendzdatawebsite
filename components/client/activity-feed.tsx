@@ -33,7 +33,7 @@ export function ActivityFeed({ items, limit = 8 }: { items: ActivityItem[]; limi
               ) : item.type === "milestone" ? (
                 <Flag className="h-5 w-5 text-emerald-500" />
               ) : (
-                <Bot className="h-5 w-5 text-cyan-500" />
+                <Bot className="h-5 w-5 text-blue-600" />
               )}
             </div>
             <div className="flex-1 min-w-0">
