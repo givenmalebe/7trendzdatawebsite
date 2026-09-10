@@ -180,7 +180,8 @@
     .animate-orb-drift-a,
     .animate-orb-drift-b,
     .animate-orb-drift-c,
-    .animate-particle-drift {
+    .animate-particle-drift,
+    .animate-aurora-sweep {
       animation: none;
     }
   }
