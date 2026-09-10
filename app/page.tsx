@@ -168,7 +168,7 @@ export default function HomePage() {
             <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100 shadow-lg h-12 px-8">
               <Link href="/contact">Contact Us <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 h-12 px-8">
+            <Button asChild size="lg" variant="outline" className="bg-white/10 border-white/40 text-white hover:bg-white/20 backdrop-blur-sm h-12 px-8">
               <a href="mailto:info@7trendzdata.com">info@7trendzdata.com</a>
             </Button>
           </div>

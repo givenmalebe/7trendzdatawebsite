@@ -50,7 +50,7 @@ export default function Web3ProductPage() {
             <Button asChild size="lg" className={`bg-gradient-to-r ${product.gradient} text-white shadow-lg`}>
               <Link href={product.ctaHref}>{product.ctaLabel}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+            <Button asChild size="lg" variant="outline" className="bg-white/10 border-white/40 text-white hover:bg-white/20 backdrop-blur-sm">
               <a href="mailto:info@7trendzdata.com">info@7trendzdata.com</a>
             </Button>
           </div>

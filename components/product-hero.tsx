@@ -20,7 +20,7 @@ export function ProductHero({ product }: { product: Product }) {
           <Button asChild size="lg" className={`bg-gradient-to-r ${product.gradient} text-white shadow-lg h-12 px-8`}>
             <Link href={product.ctaHref}>{product.ctaLabel}</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-12 px-8">
+          <Button asChild size="lg" variant="outline" className="bg-white/10 border-white/40 text-white hover:bg-white/20 backdrop-blur-sm h-12 px-8">
             <a href="mailto:info@7trendzdata.com">info@7trendzdata.com</a>
           </Button>
         </div>

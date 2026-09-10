@@ -181,7 +181,7 @@ export default function AboutPage() {
             <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100">
               <Link href="/contact">Start Your Project <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+            <Button asChild size="lg" variant="outline" className="bg-white/10 border-white/40 text-white hover:bg-white/20 backdrop-blur-sm">
               <Link href="/products/security/">Explore AI Security</Link>
             </Button>
           </div>

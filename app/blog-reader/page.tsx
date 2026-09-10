@@ -206,7 +206,7 @@ export default function BlogReader() {
                 </Button>
               </Link>
               <Link href="/products/security/">
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-xl">
+                <Button variant="outline" className="bg-white/10 border-white/40 text-white hover:bg-white/20 backdrop-blur-sm rounded-xl">
                   View Services
                 </Button>
               </Link>
