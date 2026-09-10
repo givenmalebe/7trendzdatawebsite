@@ -12,6 +12,7 @@ import Image from "next/image"
 import { fetchBlogPost, incrementViews } from "@/lib/blog-service"
 import { formatBlogContent } from "@/lib/format-content"
 import { sanitizeHTML } from "@/lib/sanitize"
+import { AnimatedBackground } from "@/components/animated-background"
 
 interface BlogPost {
   id: string
@@ -115,11 +116,7 @@ export default function BlogReader() {
 
       {/* Hero */}
       <section className="corporate-hero relative overflow-hidden pt-32 pb-16">
-        <div className="absolute inset-0 trendz-grid trendz-grid-fade opacity-50" aria-hidden />
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-        </div>
+        <AnimatedBackground />
         <div className="relative container mx-auto px-4 max-w-4xl">
           <Link href="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-white/80 text-sm mb-8 transition-colors">
             <ArrowLeft className="h-4 w-4" /> Back to all articles

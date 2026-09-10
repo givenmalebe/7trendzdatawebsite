@@ -108,6 +108,30 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "orb-drift-a": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(-48px, 34px) scale(1.12)" },
+          "66%": { transform: "translate(36px, -24px) scale(0.95)" },
+        },
+        "orb-drift-b": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(48px, -34px) scale(1.08)" },
+          "66%": { transform: "translate(-36px, 28px) scale(0.92)" },
+        },
+        "orb-drift-c": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(-28px, -30px) scale(1.05)" },
+        },
+        "grid-pan": {
+          "0%": { backgroundPosition: "0 0" },
+          "100%": { backgroundPosition: "56px 56px" },
+        },
+        "particle-drift": {
+          "0%": { transform: "translateY(0) translateX(0)", opacity: "0" },
+          "10%": { opacity: "0.7" },
+          "90%": { opacity: "0.35" },
+          "100%": { transform: "translateY(-160px) translateX(14px)", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,6 +140,11 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         "scan-line": "scan-line 8s linear infinite",
         shimmer: "shimmer 3s linear infinite",
+        "orb-drift-a": "orb-drift-a 16s ease-in-out infinite",
+        "orb-drift-b": "orb-drift-b 20s ease-in-out infinite",
+        "orb-drift-c": "orb-drift-c 24s ease-in-out infinite",
+        "grid-pan": "grid-pan 42s linear infinite",
+        "particle-drift": "particle-drift 14s linear infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

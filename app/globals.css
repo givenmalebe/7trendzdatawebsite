@@ -175,6 +175,16 @@
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .animate-grid-pan,
+    .animate-orb-drift-a,
+    .animate-orb-drift-b,
+    .animate-orb-drift-c,
+    .animate-particle-drift {
+      animation: none;
+    }
+  }
+
   .section-label-corporate {
     @apply inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700;
   }

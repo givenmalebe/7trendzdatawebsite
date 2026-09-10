@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, Sparkles, UserCheck, ShieldAlert } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CorporateBackground } from "@/components/corporate-background"
+import { AnimatedBackground } from "@/components/animated-background"
 import { submitContactMessage } from "@/lib/contact-service"
 import { PRODUCTS } from "@/lib/products"
 
@@ -90,7 +90,7 @@ function ContactForm() {
       <Header />
 
       <section className="corporate-hero relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <CorporateBackground />
+        <AnimatedBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="section-label-corporate-dark mb-4 mx-auto w-fit">Contact</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Get in Touch</h1>

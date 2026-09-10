@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CorporateBackground } from "@/components/corporate-background"
+import { AnimatedBackground } from "@/components/animated-background"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Sparkles, Target, Eye, GraduationCap, UserCheck, ShieldAlert, Boxes, Code2 } from "lucide-react"
@@ -36,7 +36,7 @@ export default function AboutPage() {
       <Header />
 
       <section className="corporate-hero relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <CorporateBackground />
+        <AnimatedBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="section-label-corporate-dark mb-4 mx-auto w-fit">About 7Trendz Data</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
