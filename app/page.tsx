@@ -1,421 +1,171 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import {
-  ArrowRight,
-  TrendingUp,
-  Users,
-  CheckCircle,
-  Star,
-  Clock,
-  Sparkles,
-  Mail,
-  Shield,
-  ShieldAlert,
-  Crosshair,
-  Bug,
-  Radar,
-  Lock,
-  UserCheck,
-  FileText,
-} from "lucide-react"
-
 import { useState } from "react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, Sparkles, Cpu, MapPin, Rocket } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CyberBackground } from "@/components/cyber-background"
-import { HeroVideoBackground } from "@/components/hero-video-background"
+import { CorporateBackground } from "@/components/corporate-background"
 import { LeadForm } from "@/components/lead-form"
-import { PENTEST_REPORT_TIERS } from "@/lib/catalog"
+import { ProductCard } from "@/components/product-card"
+import { PRODUCTS } from "@/lib/products"
+
+const testimonials = [
+  {
+    quote:
+      "The team built an internal AI assistant that actually works — it answered our most common support questions within two weeks of kickoff.",
+    author: "Ops Director, Johannesburg",
+    role: "AI Development Client",
+  },
+  {
+    quote:
+      "Their red team assessment found a critical exposure our previous auditor missed. The report was clear and the fix was easy to action.",
+    author: "CTO, Cape Town",
+    role: "AI Security Client",
+  },
+  {
+    quote:
+      "Ask Sarah paid for itself in the first quarter. Our people team finally has time for people, not paperwork.",
+    author: "HR Manager, Pretoria",
+    role: "Ask Sarah Client",
+  },
+]
 
 export default function HomePage() {
   const [leadFormOpen, setLeadFormOpen] = useState(false)
-  const services = [
-    {
-      icon: Crosshair,
-      title: "Penetration Testing",
-      description: "Simulated real-world attacks against your web apps, networks, and cloud to uncover exploitable weaknesses.",
-      color: "bg-red-600",
-      features: ["Web & API Pentesting", "Network Penetration", "Cloud Security Testing", "Remediation Reports"],
-    },
-    {
-      icon: ShieldAlert,
-      title: "Red Teaming",
-      description: "Full-scope adversary simulation that tests your people, processes, and technology under pressure.",
-      color: "bg-orange-600",
-      features: ["Adversary Simulation", "Social Engineering", "Physical & Digital Recon", "Defender Handoff Reports"],
-    },
-    {
-      icon: Radar,
-      title: "AI Recon Agents",
-      description: "Autonomous AI agents for fast reconnaissance, asset discovery, and continuous attack-surface mapping.",
-      color: "bg-cyan-600",
-      features: ["Automated Asset Discovery", "Attack Surface Mapping", "OSINT Gathering", "24/7 Continuous Recon"],
-    },
-    {
-      icon: Bug,
-      title: "AI Vulnerability Analysis",
-      description: "AI-driven triage that scans, prioritizes, and explains vulnerabilities — so you know exactly what needs fixing and who should fix it.",
-      color: "bg-purple-600",
-      features: ["Automated Vuln Scanning", "Risk Prioritization", "Exploit Scoring", "Issue Documentation"],
-    },
-    {
-      icon: UserCheck,
-      title: "Defender Matching",
-      description: "Based on the vulnerabilities and red team findings we uncover, we connect you with the right defender for each specific issue.",
-      color: "bg-rose-600",
-      features: ["Expert Referral Network", "Issue-Based Matching", "Specialist Routing", "Remediation Guidance"],
-    },
-    {
-      icon: Shield,
-      title: "Vulnerability Advisory",
-      description: "Red team-led assessments that uncover security gaps — we don't fix them ourselves, we connect you with the right defender.",
-      color: "bg-red-500",
-      features: ["Gap Identification", "Risk Prioritization", "Defender Referrals", "Issue-Specific Matching"],
-    },
-  ]
-
-  const securityServices = [
-    {
-      icon: Crosshair,
-      title: "Penetration Testing",
-      description: "Simulated real-world attacks against your web apps, networks, and cloud to uncover exploitable weaknesses.",
-      color: "bg-red-600",
-      features: ["Web & API Pentesting", "Network Penetration", "Cloud Security Testing", "Remediation Reports"],
-    },
-    {
-      icon: ShieldAlert,
-      title: "Red Teaming",
-      description: "Full-scope adversary simulation that tests your people, processes, and technology under pressure.",
-      color: "bg-orange-600",
-      features: ["Adversary Simulation", "Social Engineering", "Physical & Digital Recon", "Defender Handoff Reports"],
-    },
-    {
-      icon: Radar,
-      title: "AI Recon Agents",
-      description: "Autonomous AI agents for fast reconnaissance, asset discovery, and continuous attack-surface mapping.",
-      color: "bg-cyan-600",
-      features: ["Automated Asset Discovery", "Attack Surface Mapping", "OSINT Gathering", "24/7 Continuous Recon"],
-    },
-    {
-      icon: Bug,
-      title: "AI Vulnerability Analysis",
-      description: "AI-driven triage that scans, prioritizes, and explains vulnerabilities — so you know exactly what needs fixing and who should fix it.",
-      color: "bg-purple-600",
-      features: ["Automated Vuln Scanning", "Risk Prioritization", "Exploit Scoring", "Issue Documentation"],
-    },
-    {
-      icon: UserCheck,
-      title: "Defender Matching",
-      description: "Based on the vulnerabilities and red team findings we uncover, we connect you with the right defender for each specific issue.",
-      color: "bg-rose-600",
-      features: ["Expert Referral Network", "Issue-Based Matching", "Specialist Routing", "Remediation Guidance"],
-    },
-  ]
-
-  const benefits = [
-    { icon: Clock, title: "24/7 Coverage", description: "AI recon agents and red team analysts watch your attack surface around the clock." },
-    { icon: TrendingUp, title: "Machine-Speed Recon", description: "Autonomous agents map assets and detect exposures far faster than manual assessment." },
-    { icon: Users, title: "Expert Defender Matching", description: "Every vulnerability gets routed to the right specialist — not a one-size-fits-all fix." },
-    { icon: Star, title: "Pricing Quoted After Findings", description: "We quote your price after exploitation and findings — based on the vulnerabilities we uncover, not a fixed menu." },
-  ]
 
   return (
     <div className="page-shell">
       <Header />
 
-      {/* Hero — video background */}
-      <section className="relative min-h-[88vh] flex items-center py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-950">
-        <HeroVideoBackground />
-        <div className="pointer-events-none absolute inset-0 z-[1] cyber-grid cyber-grid-fade opacity-30" aria-hidden />
+      <section className="corporate-hero relative min-h-[88vh] flex items-center py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <CorporateBackground />
         <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
-          <div className="section-label-dark mb-6 mx-auto w-fit">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-            </span>
-            Cybersecurity & Red Teaming
+          <div className="section-label-corporate-dark mb-6 mx-auto w-fit">
+            <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
+            Building the Future with AI
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 text-balance drop-shadow-lg">
-            <span className="text-red-500">Red Team.</span> Find Vulnerabilities.{" "}
-            <span className="gradient-text-brand">Connect the Right Defender.</span>
+            AI that Works Across <span className="text-cyan-400">Security</span>, <span className="text-blue-400">Learning</span>, and <span className="text-amber-400">Innovation</span>
           </h1>
           <p className="text-xl text-slate-200 mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-            We&apos;re not defenders — we&apos;re red teamers. We expose security gaps through AI-powered recon,
-            pentesting, and vulnerability analysis, then connect you with the right defender based on each issue we find.
+            From intelligent security to smart learning platforms — 7Trendz Data builds AI solutions that transform how
+            you work, learn, and protect. Red teaming with AI, the FutureLearning platform, the Ask Sarah AI HR
+            assistant, Web3 builds, and custom AI applications.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/30 h-12 px-8">
-              <Link href="/contact#pricing">
-                <FileText className="mr-2 h-5 w-5" />
-                Pentesting Report Pricing
-              </Link>
+            <Button asChild size="lg" className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/30 h-12 px-8">
+              <a href="#products">Explore Our Products <ArrowRight className="ml-2 h-5 w-5" /></a>
             </Button>
-            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-500/30 h-12 px-8" onClick={() => setLeadFormOpen(true)}>
-              <Crosshair className="mr-2 h-4 w-4" />
-              Book Red Team Assessment
+            <Button size="lg" onClick={() => setLeadFormOpen(true)} className="border-blue-300/40 text-blue-100 hover:bg-white/10 h-12 px-8 bg-white/5">
+              Get in Touch
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Featured package — Pentesting Report Pricing */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600">
+      <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-yellow-400 text-yellow-900 text-base px-4 py-1.5 font-semibold">
-              Complete Client Solution
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Cybersecurity — Delivered as a Pentesting Report</h2>
-            <p className="text-xl text-emerald-50 max-w-2xl mx-auto">
-              Every engagement is delivered as a Pentesting Report — pricing is quoted after exploitation and findings,
-              and every issue is matched to the right defender.
+          <div className="text-center mb-14">
+            <div className="section-label-corporate mb-4 mx-auto w-fit">Our Products</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Five Ways We Build with AI</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Each product is its own sub-brand — designed, built, and run on AI.
             </p>
           </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {PRODUCTS.slice(0, 3).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto mt-8">
+            {PRODUCTS.slice(3).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="space-y-5">
-              {[
-                { icon: Crosshair, title: "Penetration Testing", desc: "We simulate real-world attacks, map your attack surface, and document every vulnerability we find.", color: "bg-white/20" },
-                { icon: Bug, title: "Vulnerability Analysis", desc: "AI-driven triage prioritizes findings by severity and exploit likelihood — every issue documented for handoff.", color: "bg-white/20" },
-                { icon: UserCheck, title: "Defender Matching", desc: "We connect you with the right defender for each issue — based on what we uncover, not generic referrals.", color: "bg-white/20" },
-              ].map((item) => (
-                <div key={item.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center`}>
-                      <item.icon className="h-6 w-6 text-white" />
-                    </div>
+      <section className="py-20 bg-white px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="section-label-corporate mb-4 w-fit">About 7Trendz Data</div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-5">A South African AI Company</h2>
+              <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                7Trendz Data is a South African AI company building intelligent solutions across security, education,
+                HR, Web3, and development. We develop apps using AI — and we use AI to secure them, teach with it,
+                support people with it, and build the decentralized future with it.
+              </p>
+              <p className="text-lg text-slate-600 leading-relaxed mb-8">
+                Today that means the FutureLearning LMS, the Ask Sarah AI HR assistant, AI-powered red teaming,
+                Web3 development, and custom AI applications — every one of them built with AI first.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { icon: Rocket, title: "5 Products", description: "Five AI product lines under one roof" },
+                  { icon: Cpu, title: "AI-First", description: "AI woven through every layer we build" },
+                  { icon: MapPin, title: "South African", description: "Proudly building from Johannesburg" },
+                ].map((s) => (
+                  <div key={s.title} className="bg-slate-50 rounded-xl p-5 border border-slate-100">
+                    <s.icon className="h-6 w-6 text-blue-600 mb-3" />
+                    <p className="font-semibold text-slate-900">{s.title}</p>
+                    <p className="text-sm text-slate-500">{s.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-8 text-white shadow-xl">
+              <h3 className="text-2xl font-bold mb-4">What we build</h3>
+              <ul className="space-y-3">
+                {PRODUCTS.map((p) => (
+                  <li key={p.id} className="flex items-center gap-3">
+                    <p.icon className="h-5 w-5 text-white/90" />
                     <div>
-                      <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                      <p className="font-semibold">{p.name}</p>
+                      <p className="text-sm text-blue-100">{p.tagline}</p>
                     </div>
-                  </div>
-                  <p className="text-white/90 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <Card className="border-0 shadow-2xl bg-white rounded-2xl overflow-hidden">
-              <CardHeader className="text-center pb-2 pt-8">
-                <CardTitle className="text-3xl font-bold text-slate-900">Your Pentesting Report</CardTitle>
-                <CardDescription className="text-base">Pricing is quoted after exploitation and findings</CardDescription>
-              </CardHeader>
-              <CardHeader className="pt-0">
-                <div className="space-y-3">
-                  {PENTEST_REPORT_TIERS.map((tier) => (
-                    <div key={tier.id} className="flex items-center gap-3">
-                      <span className={`h-3 w-3 rounded-full ${tier.dot} shrink-0`} />
-                      <span className="text-slate-700 flex-1">{tier.label}</span>
-                    </div>
-                  ))}
-                  <p className="text-sm text-slate-500 pt-3 border-t border-slate-100">
-                    Pricing depends on the vulnerabilities we uncover — we quote you after the assessment, based on the
-                    highest severity of vulnerability documented.
-                  </p>
-                </div>
-                <div className="space-y-3 mt-8">
-                  <Button asChild size="lg" className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white">
-                    <Link href="/contact#pricing">
-                      <Sparkles className="mr-2 h-5 w-5" />
-                      Book a Pentesting Report
-                    </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="w-full">
-                    <a href="mailto:info@7trendzdata.com">
-                      <Mail className="mr-2 h-5 w-5" />
-                      info@7trendzdata.com
-                    </a>
-                  </Button>
-                </div>
-              </CardHeader>
-            </Card>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="section-label mb-4 mx-auto w-fit">Cybersecurity Services</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What We Offer</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Red teaming, penetration testing, and vulnerability analysis — delivered as a Pentesting Report with
-              pricing quoted after findings.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card key={service.title} className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-1 bg-white">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-xl ${service.color} flex items-center justify-center mb-4 shadow-md`}>
-                    <service.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <CardTitle className="text-xl text-slate-900">{service.title}</CardTitle>
-                  <CardDescription className="text-slate-600 leading-relaxed">{service.description}</CardDescription>
-                  <ul className="space-y-1.5 pt-2">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-slate-600">
-                        <CheckCircle className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" size="lg" className="border-cyan-200 text-cyan-700 hover:bg-cyan-50">
-              <Link href="/services">
-                Explore All Services <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Security section — dark */}
-      <section className="hero-dark relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <CyberBackground variant="security" />
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="section-label-security-dark mb-4 mx-auto w-fit">
-              <Lock className="h-3.5 w-3.5" />
-              Red Teaming & Vulnerability Analysis
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              We Find the Gaps. We Connect You to the Right Defender.
-            </h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Our red team and AI agents think like attackers — exposing vulnerabilities through recon, pentesting,
-              and analysis. We don&apos;t remediate ourselves; we match each issue to the defender best suited to fix it.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {securityServices.map((service) => (
-              <div
-                key={service.title}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-red-500/40 transition-colors hover:shadow-lg hover:shadow-red-500/10"
-              >
-                <div className={`w-12 h-12 rounded-xl ${service.color} flex items-center justify-center mb-4 shadow-md`}>
-                  <service.icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-slate-400 text-sm mb-4 leading-relaxed">{service.description}</p>
-                <ul className="space-y-1">
-                  {service.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-xs text-slate-300">
-                      <CheckCircle className="h-3 w-3 text-red-400 shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Terminal mockup */}
-          <div className="max-w-2xl mx-auto mb-10 rounded-xl border border-red-500/20 overflow-hidden shadow-2xl shadow-red-900/30">
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-900/80 border-b border-white/10">
-              <div className="h-3 w-3 rounded-full bg-red-500" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500" />
-              <div className="h-3 w-3 rounded-full bg-green-500" />
-              <span className="ml-2 font-mono text-xs text-slate-400">7trendz-redteam — live recon</span>
-            </div>
-            <div className="p-5 font-mono text-sm space-y-2 bg-slate-950/90">
-              <p><span className="text-red-400">[AGENT]</span> <span className="text-slate-400">Starting attack surface scan...</span></p>
-              <p><span className="text-cyan-400">[RECON]</span> <span className="text-green-400">47 assets discovered</span></p>
-              <p><span className="text-cyan-400">[MATCH]</span> <span className="text-slate-400">Routing to specialist defender →</span> <span className="text-green-400">cloud-security-expert</span></p>
-              <p className="text-slate-500 animate-pulse">█</p>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-500/30 h-12 px-8">
-              <Link href="/contact?interest=security">
-                <Crosshair className="mr-2 h-5 w-5" />
-                Book a Red Team Assessment
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Why Clients Choose 7Trendz Data</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Red teaming, pentesting, and vulnerability discovery — with defender matching for every finding
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/30">
-                  <benefit.icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">{benefit.title}</h3>
-                <p className="text-slate-600">{benefit.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
       <section className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">How We Help Clients</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Our process: red team your environment, document every finding, and connect you with defenders for each issue
-            </p>
+            <div className="section-label-corporate mb-4 mx-auto w-fit">What Clients Say</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Trusted by Teams</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Recon & Assess", description: "Red team recon and AI agents map your attack surface and every exposure." },
-              { step: "02", title: "Find Vulnerabilities", description: "Pentesting and AI analysis expose gaps with prioritized, documented findings." },
-              { step: "03", title: "Match Defenders", description: "Each issue is routed to the right defender based on type, severity, and expertise needed." },
-              { step: "04", title: "Report & Verify", description: "You receive a Pentesting Report documenting every finding, plus verification of every fix." },
-            ].map((item) => (
-              <div key={item.step} className="text-center bg-white rounded-2xl p-6 shadow-md border border-slate-100">
-                <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-4 shadow-md">
-                  {item.step}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t) => (
+              <div key={t.author} className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+                <p className="text-slate-600 leading-relaxed mb-6">“{t.quote}”</p>
+                <div>
+                  <p className="font-semibold text-slate-900">{t.author}</p>
+                  <p className="text-sm text-slate-500">{t.role}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Find Your Vulnerabilities?</h2>
-          <p className="text-xl text-cyan-100 mb-8">
-            Book a red team assessment today — your Pentesting Report is quoted after exploitation and findings.
+      <section className="py-20 bg-gradient-to-r from-blue-700 to-cyan-700 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to build with AI?</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Explore our products or contact the team — we&apos;ll help you find the right AI solution.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-slate-100 shadow-lg h-12 px-8">
-              <Link href="/contact#pricing">
-                View Pentesting Report Pricing <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              <Link href="/contact">Contact Us <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 h-12 px-8">
-              <a href="mailto:info@7trendzdata.com">
-                <Mail className="mr-2 h-4 w-4" />
-                info@7trendzdata.com
-              </a>
+              <a href="mailto:info@7trendzdata.com">info@7trendzdata.com</a>
             </Button>
           </div>
         </div>
