@@ -41,6 +41,14 @@ export const SERVICES_PRODUCTS = PENTEST_REPORT_TIERS.map((tier) => ({
   category: "Red Team",
 }))
 
+export const ALL_SERVICES = [
+  { id: "lms-enterprise", name: "FutureLearning — Enterprise LMS", category: "futurelearning" },
+  { id: "hr-ask-sarah", name: "Ask Sarah — AI HR Assistant", category: "ask-sarah" },
+  { id: "web3-build", name: "AI Web3 Development", category: "web3" },
+  { id: "dev-custom", name: "Custom AI Application", category: "development" },
+  ...SERVICES_PRODUCTS.map((s) => ({ ...s, category: "security" })),
+]
+
 export const REPORT_STAGES = [
   { id: "intake", label: "Intake & Scoping", description: "Project kickoff and scope definition" },
   { id: "recon", label: "Reconnaissance", description: "Attack surface mapping and asset discovery" },

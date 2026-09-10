@@ -23,7 +23,8 @@ import {
 } from "@/lib/report-service"
 import { fetchLeads, updateLeadStatus, deleteLead, type Lead } from "@/lib/lead-service"
 import { uploadReportFile } from "@/lib/storage-service"
-import { SERVICES_PRODUCTS, REPORT_STAGES, DELIVERY_STATUS_LABELS, type ReportStageId, type StageStatus } from "@/lib/catalog"
+import { ALL_SERVICES, REPORT_STAGES, DELIVERY_STATUS_LABELS, type ReportStageId, type StageStatus } from "@/lib/catalog"
+import { PRODUCTS } from "@/lib/products"
 import { PostEditorForm } from "@/components/post-editor-form"
 import { AIBlogGenerator } from "@/components/ai-blog-generator"
 import { ReportStageTracker } from "@/components/report-stage-tracker"
@@ -40,10 +41,12 @@ const LEAD_STATUS_COLORS: Record<string, string> = {
 
 function LeadsTab({ leads, onRefresh }: { leads: Lead[]; onRefresh: () => Promise<void> }) {
   const [filter, setFilter] = useState<string>("all")
+  const [productFilter, setProductFilter] = useState<string>("all")
   const [search, setSearch] = useState("")
 
   const filtered = leads.filter((l) => {
     if (filter !== "all" && l.status !== filter) return false
+    if (productFilter !== "all" && (l.product || "security") !== productFilter) return false
     if (search) {
       const s = search.toLowerCase()
       if (!l.name?.toLowerCase().includes(s) && !l.email?.toLowerCase().includes(s) && !l.company?.toLowerCase().includes(s)) return false
@@ -88,6 +91,18 @@ function LeadsTab({ leads, onRefresh }: { leads: Lead[]; onRefresh: () => Promis
           ))}
         </div>
       </div>
+      <div className="flex gap-2 flex-wrap">
+        {["all", ...PRODUCTS.map((p) => p.id)].map((pid) => (
+          <Badge
+            key={pid}
+            variant={productFilter === pid ? "default" : "secondary"}
+            className="cursor-pointer"
+            onClick={() => setProductFilter(pid)}
+          >
+            {pid === "all" ? "All Products" : (PRODUCTS.find((p) => p.id === pid)?.name || pid)}
+          </Badge>
+        ))}
+      </div>
       <div className="grid gap-4">
         {filtered.length === 0 && <p className="text-muted-foreground">No leads found.</p>}
         {filtered.map((lead) => (
@@ -100,7 +115,12 @@ function LeadsTab({ leads, onRefresh }: { leads: Lead[]; onRefresh: () => Promis
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${LEAD_STATUS_COLORS[lead.status] || ""}`}>{lead.status}</span>
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{lead.email}{lead.phone ? ` · ${lead.phone}` : ""}{lead.company ? ` · ${lead.company}` : ""}</p>
-                  <p className="text-sm mt-1"><span className="font-medium">Interest:</span> {lead.interest}</p>
+                  <p className="text-sm mt-1"><span className="font-medium">Interest:</span> {lead.interest}
+                    {lead.product && (
+                      <span className="ml-2 inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md bg-blue-50 text-blue-700 border border-blue-200">
+                        {PRODUCTS.find((p) => p.id === lead.product)?.name || lead.product}
+                      </span>
+                    )}</p>
                   {lead.message && <p className="text-sm text-slate-600 mt-1 line-clamp-2">{lead.message}</p>}
                   <p className="text-xs text-muted-foreground mt-2">Source: {lead.source} · {new Date(lead.created_at).toLocaleString()}</p>
                 </div>
@@ -138,6 +158,7 @@ function AdminContent() {
 
   const [newClient, setNewClient] = useState({ name: "", company: "", email: "", phone: "", status: "active" as Client["status"] })
   const [newRevenue, setNewRevenue] = useState({ clientId: "", serviceId: "", amount: "", status: "pending" as RevenueEntry["status"], notes: "" })
+  const [revenueProduct, setRevenueProduct] = useState("all")
   const [newReport, setNewReport] = useState({ clientId: "", title: "", description: "" })
   const [selectedReport, setSelectedReport] = useState<RedTeamReport | null>(null)
   const [uploadingReport, setUploadingReport] = useState(false)
@@ -196,7 +217,7 @@ function AdminContent() {
 
   const handleAddRevenue = async () => {
     const client = clients.find((c) => c.id === newRevenue.clientId)
-    const service = SERVICES_PRODUCTS.find((s) => s.id === newRevenue.serviceId)
+    const service = ALL_SERVICES.find((s) => s.id === newRevenue.serviceId)
     if (!client || !service || !newRevenue.amount) return
     await createRevenueEntry({
       clientId: client.id,
@@ -262,6 +283,10 @@ function AdminContent() {
       </AdminShell>
     )
   }
+
+  const revenueServices = revenueProduct === "all"
+    ? ALL_SERVICES
+    : ALL_SERVICES.filter((s) => s.category === revenueProduct)
 
   return (
     <AdminShell>
@@ -457,7 +482,19 @@ function AdminContent() {
             <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Entries</CardTitle></CardHeader><CardContent><p className="text-2xl font-bold">{revenue.length}</p></CardContent></Card>
           </div>
           <Card>
-            <CardHeader><CardTitle>Record Sale</CardTitle></CardHeader>
+            <CardHeader className="flex items-center justify-between gap-4">
+              <CardTitle>Record Sale</CardTitle>
+              <div className="flex items-center gap-3">
+                <Label className="text-sm font-normal text-muted-foreground">Filter by Product</Label>
+                <Select value={revenueProduct} onValueChange={setRevenueProduct}>
+                  <SelectTrigger className="w-[200px]"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Products</SelectItem>
+                    {PRODUCTS.map((p) => <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
             <CardContent className="grid gap-4 md:grid-cols-2">
               <div>
                 <Label>Client</Label>
@@ -470,7 +507,7 @@ function AdminContent() {
                 <Label>Service / Product</Label>
                 <Select value={newRevenue.serviceId} onValueChange={(v) => setNewRevenue({ ...newRevenue, serviceId: v })}>
                   <SelectTrigger><SelectValue placeholder="Select service" /></SelectTrigger>
-                  <SelectContent>{SERVICES_PRODUCTS.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent>
+                  <SelectContent>{revenueServices.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
               <div><Label>Amount (ZAR)</Label><Input type="number" value={newRevenue.amount} onChange={(e) => setNewRevenue({ ...newRevenue, amount: e.target.value })} /></div>
