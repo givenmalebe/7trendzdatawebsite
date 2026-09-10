@@ -2,22 +2,26 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, Shield, UserCheck, Crosshair } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Mail, Phone, MapPin, Clock, CheckCircle, AlertCircle, Sparkles, UserCheck, ShieldAlert } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CyberBackground } from "@/components/cyber-background"
+import { CorporateBackground } from "@/components/corporate-background"
 import { submitContactMessage } from "@/lib/contact-service"
-import { PENTEST_REPORT_TIERS } from "@/lib/catalog"
+import { PRODUCTS } from "@/lib/products"
 
-export default function ContactPage() {
+function ContactForm() {
+  const searchParams = useSearchParams()
+  const initialProduct = searchParams.get("product") || ""
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,6 +29,7 @@ export default function ContactPage() {
     phone: "",
     subject: "",
     message: "",
+    product: initialProduct,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
@@ -38,7 +43,17 @@ export default function ContactPage() {
     setSubmitStatus({ type: null, message: "" })
 
     try {
-      await submitContactMessage(formData)
+      const productName = PRODUCTS.find((p) => p.id === formData.product)?.name
+      const message = productName ? `Product: ${productName}\n${formData.message}` : formData.message
+
+      await submitContactMessage({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company || undefined,
+        phone: formData.phone || undefined,
+        subject: formData.subject,
+        message,
+      })
 
       setSubmitStatus({
         type: "success",
@@ -51,6 +66,7 @@ export default function ContactPage() {
         phone: "",
         subject: "",
         message: "",
+        product: initialProduct,
       })
     } catch (error) {
       setSubmitStatus({
@@ -73,14 +89,14 @@ export default function ContactPage() {
     <div className="page-shell">
       <Header />
 
-      <section className="hero-dark relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <CyberBackground variant="hero" />
+      <section className="corporate-hero relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <CorporateBackground />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <div className="section-label-dark mb-4 mx-auto w-fit">Contact</div>
+          <div className="section-label-corporate-dark mb-4 mx-auto w-fit">Contact</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">Get in Touch</h1>
           <p className="text-xl text-slate-300 leading-relaxed">
-            Have questions about cybersecurity, red teaming, or vulnerability analysis? We find the gaps and connect
-            you with the right defender — every engagement is delivered as a Pentesting Report, quoted after findings.
+            Have questions about our AI products — security, learning, HR, Web3, or development? Tell us what you want
+            to build and we&apos;ll get back to you within 24 hours.
           </p>
         </div>
       </section>
@@ -153,6 +169,26 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
+                      <Label>Product</Label>
+                      <Select
+                        value={formData.product || "none"}
+                        onValueChange={(v) =>
+                          setFormData((prev) => ({ ...prev, product: v === "none" ? "" : v }))
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a product" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">General Enquiry</SelectItem>
+                          {PRODUCTS.map((p) => (
+                            <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
                       <Label htmlFor="subject">
                         Subject <span className="text-red-500">*</span>
                       </Label>
@@ -192,7 +228,11 @@ export default function ContactPage() {
                       </Alert>
                     )}
 
-                    <Button type="submit" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white" disabled={isSubmitting}>
+                    <Button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white"
+                      disabled={isSubmitting}
+                    >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
@@ -209,27 +249,27 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <Mail className="h-5 w-5 text-cyan-600 mt-0.5" />
+                    <Mail className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="font-medium text-slate-900">Email</p>
-                      <a href="mailto:info@7trendzdata.com" className="text-cyan-600 hover:underline">
+                      <a href="mailto:info@7trendzdata.com" className="text-blue-600 hover:underline">
                         info@7trendzdata.com
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Phone className="h-5 w-5 text-cyan-600 mt-0.5" />
+                    <Phone className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="font-medium text-slate-900">Phone</p>
-                      <a href="tel:+27736289188" className="text-cyan-600 hover:underline">
+                      <a href="tel:+27736289188" className="text-blue-600 hover:underline">
                         +27 736 289 188
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <MapPin className="h-5 w-5 text-cyan-600 mt-0.5" />
+                    <MapPin className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="font-medium text-slate-900">Location</p>
                       <p className="text-slate-600">113 2nd Avenue Wynberg, Johannesburg, South Africa</p>
@@ -237,7 +277,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-3">
-                    <Clock className="h-5 w-5 text-cyan-600 mt-0.5" />
+                    <Clock className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="font-medium text-slate-900">Business Hours</p>
                       <p className="text-slate-600">Mon-Fri: 9:00 AM - 6:00 PM SAST</p>
@@ -247,16 +287,16 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-lg bg-gradient-to-br from-cyan-50 to-blue-50">
+              <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-cyan-50">
                 <CardHeader>
                   <CardTitle>Why Choose 7Trendz Data?</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {[
-                    { icon: Shield, text: "Red teaming & vulnerability discovery" },
-                    { icon: UserCheck, text: "Defender matching for every issue we find" },
-                    { icon: Crosshair, text: "Pentesting Reports quoted after findings" },
-                    { icon: CheckCircle, text: "24/7 AI recon and security monitoring" },
+                    { icon: Sparkles, text: "Five AI product lines under one roof" },
+                    { icon: UserCheck, text: "FutureLearning & Ask Sarah for learning and HR" },
+                    { icon: ShieldAlert, text: "AI red teaming that finds the gaps" },
+                    { icon: CheckCircle, text: "AI development & Web3 builds that ship" },
                   ].map((item) => (
                     <div key={item.text} className="flex items-start gap-2">
                       <item.icon className="h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" />
@@ -270,39 +310,21 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Pentesting Report Pricing */}
-      <section id="pricing" className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
+      {/* Products Teaser */}
+      <section id="products" className="py-20 bg-slate-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <div className="section-label mb-4 mx-auto w-fit">Pricing</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Pentesting Report Pricing</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report — pricing is
-              quoted after exploitation and findings.
-            </p>
+            <div className="section-label-corporate mb-4 mx-auto w-fit">Our Products</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Our AI Products</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">Explore what we build with AI.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PENTEST_REPORT_TIERS.map((tier) => (
-              <Card key={tier.id} className="border-0 shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`h-3 w-3 rounded-full ${tier.dot}`} />
-                    <Badge variant="outline" className={`border ${tier.badge}`}>{tier.severity}</Badge>
-                  </div>
-                  <CardTitle className="text-xl">{tier.label}</CardTitle>
-                  <CardDescription className="text-slate-600">{tier.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-xl font-bold text-slate-900">Quoted after findings</p>
-                  <p className="text-sm text-slate-500">Price depends on the vulnerabilities we uncover</p>
-                </CardContent>
-              </Card>
+          <div className="flex flex-wrap justify-center gap-3">
+            {PRODUCTS.map((p) => (
+              <Button key={p.id} asChild variant="outline">
+                <Link href={p.url}><p.icon className="mr-2 h-4 w-4" />{p.name}</Link>
+              </Button>
             ))}
           </div>
-          <p className="text-center text-sm text-slate-500 mt-8">
-            Pricing is quoted after exploitation and findings, based on the vulnerabilities we document. Contact us to
-            book your assessment — we'll respond within 24 hours.
-          </p>
         </div>
       </section>
 
@@ -329,33 +351,34 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  We only offer cybersecurity services. Every engagement is delivered as a Pentesting Report. Pricing
-                  is quoted after exploitation and findings, based on the severity and scope of the vulnerabilities we
-                  uncover — you'll agree the amount with us before the final report is delivered. No hidden fees.
+                  Every product is priced for the value it delivers. For AI security, engagements are delivered as a
+                  Pentesting Report — pricing quoted after findings. For learning, HR, Web3, and custom AI builds, we
+                  scoped a proposal to your requirements before any commitment.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border shadow-sm bg-white">
               <CardHeader>
-                <CardTitle className="text-lg">What does the Pentesting Report include?</CardTitle>
+                <CardTitle className="text-lg">What products does 7Trendz Data offer?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  Every report documents the vulnerabilities we find, prioritized by severity, with remediation guidance
-                  and issue-specific defender matching so you know exactly who to engage to fix each finding.
+                  Five AI product lines: FutureLearning (AI learning management), Ask Sarah (AI HR assistant), AI
+                  Security (red teaming & pentesting), AI Web3 Dev (smart contracts, dApps, and DAOs), and AI
+                  Development (custom AI applications).
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border shadow-sm bg-white">
               <CardHeader>
-                <CardTitle className="text-lg">What industries do you serve?</CardTitle>
+                <CardTitle className="text-lg">Which industries do you serve?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600">
-                  We work with businesses across all industries including healthcare, finance, retail, and real estate.
-                  Our cybersecurity assessments are tailored to any sector.
+                  We work with businesses across all industries — healthcare, finance, retail, education, real estate,
+                  and more. Our AI products are tailored to any sector and platform.
                 </p>
               </CardContent>
             </Card>
@@ -365,5 +388,13 @@ export default function ContactPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ContactForm />
+    </Suspense>
   )
 }
